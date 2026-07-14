@@ -6,8 +6,12 @@
 <meta name="theme-color" content="#0B0B0C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="NYC Card">
-<title>NYC Pocket Card — Rina</title>
+<meta name="apple-mobile-web-app-title" content="NYC">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<title>NYC Pocket Card</title>
 <style>
   :root{
     --ink:#0B0B0C; --paper:#E4E4DF; --card:#fff;
@@ -404,5 +408,13 @@
 
   <div class="ft">RINA · TOYOOKA → NYC · ADD TO HOME SCREEN</div>
 </div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+</script>
 </body>
 </html>

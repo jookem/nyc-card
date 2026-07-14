@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NYC Survival English — Rina · Toyooka → New York</title>
+<style>
+  :root{
+    --ink:#0B0B0C;
+    --panel:#17171B;
+    --paper:#E4E4DF;
+    --card:#FFFFFF;
+    --line1:#EE352E;
+    --lineA:#0039A6;
+    --lineN:#FCCC0A;
+    --go:#00933C;
+    --no:#EE352E;
+    --gray:#7F8184;
+    --hair:#C9C9C3;
+    --accent:var(--line1);
+    --sig:'Helvetica Neue',Helvetica,Arial,'Hiragino Sans','Yu Gothic',sans-serif;
+    --talk:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,'Hiragino Sans','Yu Gothic',sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sig);
+    line-height:1.5;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  body.jp-off .jp{display:none}
+
+  /* ---------- SIGNAGE HEADER ---------- */
+  .sign{
+    background:var(--ink);color:#fff;
+    padding:14px 18px 12px;
+    display:flex;align-items:center;gap:14px;
+    position:sticky;top:0;z-index:20;
+  }
+  .bullet{
+    width:44px;height:44px;flex:0 0 44px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    display:grid;place-items:center;
+    font-weight:700;font-size:24px;letter-spacing:0;
+  }
+  .bullet.dark{color:var(--ink)}
+  .sign-txt{flex:1;min-width:0}
+  .sign-txt .eyebrow{
+    font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:#9A9A9E;font-weight:700;
+  }
+  .sign-txt .stop{
+    font-size:19px;font-weight:700;letter-spacing:-.01em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .jp-btn{
+    background:none;border:1.5px solid #4A4A50;color:#CFCFD3;
+    font-family:var(--sig);font-weight:700;font-size:11px;letter-spacing:.08em;
+    padding:7px 10px;border-radius:3px;cursor:pointer;flex:0 0 auto;
+  }
+  .jp-btn[aria-pressed="true"]{background:#fff;color:var(--ink);border-color:#fff}
+  .jp-btn:focus-visible,button:focus-visible{outline:3px solid var(--lineN);outline-offset:2px}
+
+  /* ---------- LINE PICKER ---------- */
+  .lines{
+    background:var(--panel);
+    display:flex;gap:8px;padding:0 18px 12px;
+    position:sticky;top:70px;z-index:19;
+  }
+  .line-tab{
+    display:flex;align-items:center;gap:8px;
+    background:#26262C;border:none;border-radius:999px;
+    padding:6px 14px 6px 6px;cursor:pointer;
+    color:#8E8E94;font-family:var(--sig);font-weight:700;font-size:12px;
+    letter-spacing:.02em;
+  }
+  .line-tab .dot{
+    width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+    font-size:14px;font-weight:700;color:#fff;
+  }
+  .line-tab[aria-selected="true"]{background:#fff;color:var(--ink)}
+
+  /* ---------- ROUTE STRIP ---------- */
+  .route{
+    background:var(--panel);padding:0 18px 16px;
+    position:sticky;top:118px;z-index:18;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+  }
+  .route-inner{display:flex;align-items:center;min-width:max-content;position:relative}
+  .route-inner::before{
+    content:"";position:absolute;left:7px;right:7px;top:6px;height:3px;
+    background:#3A3A42;
+  }
+  .stopdot{
+    position:relative;background:none;border:none;cursor:pointer;
+    padding:0 0 0 0;margin-right:26px;
+    display:flex;flex-direction:column;align-items:flex-start;gap:6px;
+  }
+  .stopdot:last-child{margin-right:0}
+  .stopdot i{
+    width:15px;height:15px;border-radius:50%;
+    background:#3A3A42;border:3px solid var(--panel);
+    display:block;z-index:1;position:relative;
+    transition:background .18s;
+  }
+  .stopdot.done i{background:#6E6E78}
+  .stopdot.here i{background:var(--accent);transform:scale(1.25)}
+  .stopdot span{
+    font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+    color:#6E6E78;white-space:nowrap;
+  }
+  .stopdot.here span{color:#fff}
+
+  /* ---------- SLIDE ---------- */
+  main{flex:1;padding:26px 18px 130px;max-width:780px;margin:0 auto;width:100%}
+  .slide{display:none;animation:in .28s ease-out}
+  .slide.on{display:block}
+  @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .kicker{
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+    color:var(--gray);margin-bottom:8px;
+  }
+  h2{
+    font-size:30px;line-height:1.1;letter-spacing:-.025em;font-weight:700;
+    margin-bottom:6px;
+  }
+  .sub{color:#4E4E54;font-size:16px;margin-bottom:24px;max-width:56ch;line-height:1.5}
+  .sub .jp{display:block;font-size:14.5px;color:#6E6E74;margin-top:5px;line-height:1.6}
+
+  .card{
+    background:var(--card);border-radius:4px;padding:18px 20px;margin-bottom:10px;
+    border-left:5px solid var(--accent);
+  }
+
+  /* phrases */
+  .phrase{
+    background:var(--card);border-radius:4px;padding:15px 18px;margin-bottom:8px;
+    border-left:5px solid var(--accent);
+  }
+  .ph-en{font-size:22px;font-weight:700;letter-spacing:-.012em;line-height:1.3}
+  .ph-jp{font-family:var(--talk);font-size:15px;color:#5E5E64;margin-top:6px;line-height:1.5}
+  .ph-note{
+    font-family:var(--mono);font-size:12.5px;color:#6C6C70;
+    margin-top:9px;padding-top:9px;border-top:1px dashed var(--hair);
+    letter-spacing:-.01em;line-height:1.5;
+  }
+  .ph-note .jp{
+    display:block;font-family:var(--talk);font-size:13.5px;color:#5E5E64;
+    line-height:1.65;margin-top:6px;letter-spacing:0;
+  }
+  .warn{
+    background:#FFF3D6;border-left-color:var(--lineN);
+  }
+  .warn .ph-note{border-top-color:#E3C87E}
+  .warn .ph-note .jp{color:#6B5A28}
+  .warn .ph-en{font-size:18px}
+
+  /* say / know */
+  .tier{margin-bottom:20px}
+  .tier-head{
+    display:flex;align-items:center;gap:9px;margin-bottom:10px;
+  }
+  .tier-head i{width:22px;height:22px;border-radius:50%;flex:0 0 22px}
+  .tier-head b{font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+  .tier-head em{font-style:normal;font-size:13.5px;color:var(--gray);font-family:var(--talk)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    background:var(--card);border:1.5px solid var(--hair);border-radius:999px;
+    padding:9px 15px;font-size:15.5px;font-weight:700;line-height:1.25;
+  }
+  .chip small{display:block;font-family:var(--talk);font-weight:400;font-size:12.5px;color:var(--gray);margin-top:2px}
+  .say .chip{border-color:var(--go);color:#0A6B33}
+  .know .chip{border-color:#D8B400;background:#FFFBEE}
+  .rule{
+    margin-top:16px;background:var(--ink);color:#fff;border-radius:4px;
+    padding:16px 18px;font-size:16px;font-weight:700;line-height:1.4;
+  }
+  .rule .jp{display:block;font-family:var(--talk);font-weight:400;color:#B5B5BA;font-size:13.5px;margin-top:6px;line-height:1.55}
+
+  /* dialogue */
+  .dlg{background:var(--card);border-radius:4px;padding:16px 14px;margin-bottom:12px}
+  .turn{display:flex;margin-bottom:9px;font-family:var(--talk)}
+  .turn.b{justify-content:flex-end}
+  .bub{
+    max-width:80%;padding:11px 15px;border-radius:18px;font-size:16.5px;line-height:1.45;
+    background:#EFEFEA;border-bottom-left-radius:4px;
+  }
+  .turn.b .bub{background:var(--accent);color:#fff;border-radius:16px;border-bottom-right-radius:4px}
+  .turn.b .bub.pale{color:var(--ink)}
+  .bub .jp{display:block;font-size:13.5px;opacity:.75;margin-top:5px;line-height:1.5}
+  .who{
+    font-family:var(--sig);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:700;color:var(--gray);align-self:flex-end;margin:0 7px 5px;
+  }
+  .dlg.hide-b .turn.b .bub{color:transparent;background:repeating-linear-gradient(45deg,#DCDCD6,#DCDCD6 6px,#E8E8E2 6px,#E8E8E2 12px)}
+  .dlg.hide-b .turn.b .bub .jp{color:#5C5C60;opacity:1}
+  .btn-ghost{
+    background:none;border:1.5px solid var(--ink);border-radius:3px;
+    font-family:var(--sig);font-weight:700;font-size:12px;letter-spacing:.09em;
+    text-transform:uppercase;padding:10px 15px;cursor:pointer;margin-bottom:14px;
+  }
+  .btn-ghost[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+  /* cloze */
+  .q{background:var(--card);border-radius:4px;padding:16px 18px;margin-bottom:10px}
+  .q-sit{font-family:var(--talk);font-size:14.5px;color:#6C6C70;margin-bottom:8px;line-height:1.5}
+  .q-txt{font-size:20px;font-weight:700;margin-bottom:14px;line-height:1.4}
+  .q-txt u{text-decoration:none;border-bottom:3px solid var(--hair);padding:0 22px}
+  .opts{display:flex;flex-wrap:wrap;gap:7px}
+  .opt{
+    background:#F2F2ED;border:1.5px solid var(--hair);border-radius:3px;
+    padding:11px 16px;font-family:var(--sig);font-size:16.5px;font-weight:700;
+    cursor:pointer;transition:transform .1s;
+  }
+  .opt:hover{transform:translateY(-1px)}
+  .opt.right{background:var(--go);border-color:var(--go);color:#fff}
+  .opt.wrong{background:#FCE8E7;border-color:var(--no);color:var(--no)}
+  .opt:disabled{cursor:default;transform:none}
+  .q-why{
+    display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--hair);
+    font-family:var(--talk);font-size:14.5px;color:#44444A;line-height:1.6;
+  }
+  .q.solved .q-why{display:block}
+  .q-no{
+    display:none;margin-top:12px;padding:13px 15px;border-radius:3px;
+    background:#FCE8E7;border-left:4px solid var(--no);
+    font-family:var(--talk);font-size:14.5px;color:#8C2019;line-height:1.6;
+  }
+  .q-no.on{display:block}
+  .q-no .jp{
+    display:block;margin-top:8px;padding-top:8px;
+    border-top:1px solid rgba(238,53,46,.25);
+    font-size:13.5px;color:#A2453C;line-height:1.65;
+  }
+  .q-why .jp{
+    display:block;margin-top:8px;padding-top:8px;
+    border-top:1px dashed var(--hair);
+    font-size:13.5px;color:#65656B;line-height:1.65;
+  }
+  .q-no b{
+    display:block;font-family:var(--sig);font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;margin-bottom:6px;color:var(--no);
+  }
+  .q.solved .q-no{display:none}
+  .score{
+    background:var(--ink);color:#fff;border-radius:4px;padding:15px 18px;
+    font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;align-items:center;
+  }
+  .score b{font-size:24px}
+
+  /* culture */
+  .cu{background:var(--card);border-radius:4px;padding:15px 18px;margin-bottom:8px;display:flex;gap:14px}
+  .cu-n{
+    font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:700;
+    flex:0 0 24px;padding-top:4px;
+  }
+  .cu h4{font-size:17.5px;margin-bottom:5px;letter-spacing:-.012em;line-height:1.3}
+  .cu p{font-family:var(--talk);font-size:15px;color:#4C4C52;line-height:1.6}
+  .cu .jp{display:block;color:#707076;font-size:14px;margin-top:6px;line-height:1.65}
+
+  /* free talk */
+  .draw{
+    background:var(--ink);color:#fff;border-radius:6px;padding:30px 22px;
+    min-height:190px;display:flex;flex-direction:column;justify-content:center;
+    margin-bottom:12px;
+  }
+  .draw .lab{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:12px}
+  .draw .task{font-size:24px;font-weight:700;line-height:1.3;letter-spacing:-.018em}
+  .draw .jp{display:block;font-family:var(--talk);font-weight:400;font-size:14.5px;color:#A9A9AF;margin-top:11px;line-height:1.6}
+  .btn-solid{
+    background:var(--accent);color:#fff;border:none;border-radius:3px;
+    font-family:var(--sig);font-weight:700;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;padding:13px 20px;cursor:pointer;width:100%;
+  }
+  .btn-solid.dark-txt{color:var(--ink)}
+  .helper{
+    margin-top:14px;background:var(--card);border-radius:4px;padding:14px 18px;
+  }
+  .helper b{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gray);display:block;margin-bottom:9px}
+
+  /* ---------- MISSION CARD (MetroCard homage) ---------- */
+  .metro{
+    position:relative;display:flex;flex-direction:column;
+    border-radius:10px;overflow:hidden;color:#141414;
+    background:linear-gradient(118deg,#E2921F 0%,#F0B44E 16%,#FBDFA6 40%,#F7C868 58%,#EDA537 78%,#DE8B18 100%);
+    clip-path:polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%);
+    box-shadow:0 14px 34px rgba(0,0,0,.22);
+    min-height:290px;
+  }
+  .metro::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(150% 70% at 92% 74%, rgba(190,116,12,.30) 0 38%, transparent 39%),
+      radial-gradient(130% 60% at 100% 60%, rgba(190,116,12,.24) 0 42%, transparent 43%),
+      radial-gradient(110% 48% at 104% 50%, rgba(190,116,12,.18) 0 46%, transparent 47%);
+  }
+  .mc-in{position:relative;z-index:1;flex:1;padding:20px 22px 18px}
+  .mc-lab{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:#8A5A0C;
+  }
+  .mc-mark{
+    font-size:46px;font-weight:700;letter-spacing:-.045em;line-height:.92;
+    color:#1359A8;margin:2px 0 16px;transform:rotate(-2.2deg);transform-origin:left center;
+    text-shadow:2px 3px 0 rgba(120,72,8,.18);
+  }
+  .mc-mark span{color:#E7A22C;-webkit-text-stroke:2px #1359A8}
+  .mc-do{
+    font-size:25px;font-weight:700;line-height:1.2;letter-spacing:-.022em;
+    max-width:82%;color:#141414;
+  }
+  .mc-jp{
+    font-family:var(--talk);font-size:14px;line-height:1.6;margin-top:9px;
+    max-width:82%;color:#5C400E;
+  }
+  .mc-hole{
+    position:absolute;left:24px;bottom:96px;width:11px;height:11px;border-radius:50%;
+    background:#fff;z-index:2;box-shadow:inset 0 1px 2px rgba(0,0,0,.2);
+  }
+  .mc-stripe{height:52px;background:#1D1D1F;position:relative;z-index:1;flex:0 0 52px}
+  .mc-swipe{
+    position:relative;z-index:1;background:#E9A62D;color:#fff;
+    display:flex;align-items:center;gap:11px;padding:9px 16px;
+    border-top:1px solid rgba(255,255,255,.28);
+  }
+  .mc-swipe .arw{
+    font-size:12px;letter-spacing:.28em;color:#fff;flex:0 0 auto;line-height:1;
+  }
+  .mc-swipe b{
+    font-size:11.5px;font-weight:700;letter-spacing:.01em;line-height:1.35;
+  }
+  .mc-swipe b em{
+    font-style:normal;font-family:var(--talk);font-weight:400;font-size:10.5px;
+    color:rgba(255,255,255,.82);display:block;
+  }
+
+  /* footer nav */
+  .nav{
+    position:fixed;bottom:0;left:0;right:0;background:var(--ink);
+    display:flex;align-items:center;gap:12px;padding:12px 18px;z-index:20;
+  }
+  .nav button{
+    flex:1;background:#26262C;color:#fff;border:none;border-radius:3px;
+    font-family:var(--sig);font-weight:700;font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;padding:14px;cursor:pointer;
+  }
+  .nav button:disabled{opacity:.32;cursor:default}
+  .nav button.next{background:var(--accent)}
+  .nav button.next.dark-txt{color:var(--ink)}
+  .nav .cnt{font-family:var(--mono);font-size:11px;color:#8E8E94;flex:0 0 auto;letter-spacing:.05em}
+
+  @media (max-width:560px){
+    h2{font-size:26px}
+    .ph-en{font-size:20px}
+    .bub{max-width:86%;font-size:16px}
+    .draw .task{font-size:21px}
+    .metro .mc-do{font-size:21px;max-width:70%}
+    .metro .mc-jp{max-width:70%}
+    .route{top:112px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="sign">
+  <div class="bullet" id="bullet">1</div>
+  <div class="sign-txt">
+    <div class="eyebrow" id="eyebrow">Lesson 1 · Surviving &amp; Starting</div>
+    <div class="stop" id="stopname">Mission</div>
+  </div>
+  <button class="jp-btn" id="jpBtn" aria-pressed="true">日本語 ON</button>
+</header>
+
+<nav class="lines" id="lines" role="tablist" aria-label="Lessons"></nav>
+<nav class="route" aria-label="Sections"><div class="route-inner" id="route"></div></nav>
+
+<main id="stage"></main>
+
+<nav class="nav">
+  <button id="prev">← Back</button>
+  <span class="cnt" id="cnt">1 / 9</span>
+  <button id="next" class="next">Next →</button>
+</nav>
+
+<script>
+const D = [
+{
+  id:'L1', bullet:'1', color:'var(--line1)', dark:false,
+  name:'Arrival Day',
+  stops:[
+    {n:'Mission', type:'mission', h:'Everyone else is nervous too.', s:'You are not going to a city full of confident Americans. You are going to a camp full of teenagers from all over the world — and almost none of them speak perfect English either.', jp:'自信満々のアメリカ人ばかりの街に行くのではありません。世界中から来た10代のキャンプ。ほとんどの子も英語は完璧じゃありません。',
+     pts:[
+       {t:'Your friends will be Italian, Brazilian, Korean, Turkish.', d:'Tamwood at Fordham takes campers aged 11–17 from around the world. They will have accents. They will make mistakes. They will say "how do you say...?" — just like you. This is the safest room you will ever practise in.', jp:'イタリア人、ブラジル人、韓国人、トルコ人。みんな訛りがあって、間違えて、「これ英語で何て言うの？」と言います。あなたと同じ。世界一安全な練習場所です。'},
+       {t:'The real problem isn\'t vocabulary. It\'s the freeze.', d:'You know more English than you think. The problem is the second you don\'t understand — you go quiet and smile. Then it gets harder and harder to speak.', jp:'語彙の問題ではありません。「分からない」瞬間に固まって、黙って笑ってしまう。それが本当の敵。'},
+       {t:'Today: never be silent.', d:'You get 8 phrases that mean "I don\'t understand" — so you always have something to say, even when you understand nothing. And you get the words for your roommate, your dorm, and the dining hall.', jp:'今日は「分からない」を伝える8フレーズ。何も分からなくても言葉がある状態にします。さらに、ルームメイト・寮・食堂の言葉も。'}
+     ]},
+    {n:'Repair Kit', type:'phrases', h:'The Repair Kit', s:'The 8 most important phrases of the whole trip. Memorize these before anything else — and use them on everyone.', jp:'この旅行で一番大事な8フレーズ。まずこれだけは覚える。誰に対しても使っていい。',
+     items:[
+       {en:'Sorry, what?', jp:'え、なんて？', note:'The everyday one. Friends use this constantly. Not rude.', noteJp:'一番よく使う形。友達同士ならごく普通。失礼ではありません。'},
+       {en:'Say that again?', jp:'もう一回言って？', note:'sounds like → "say \'at again?"', noteJp:'実際の音は「セイ・ザッ・アゲン？」'},
+       {en:"Sorry, I didn't catch that.", jp:'ごめん、聞き取れなかった。', note:'catch = 聞き取る. NOT "I didn\'t listen."', noteJp:'catch＝聞き取る。"I didn\'t listen." は間違いです。'},
+       {en:"What's ___ mean?", jp:'___ってどういう意味？', note:'NOT "What means ___?" · sounds like → "whatsit mean?"', noteJp:'"What means ___?" は間違い。音は「ワッツィッ・ミーン？」'},
+       {en:'Could you speak slower, please?', jp:'もう少しゆっくり話してもらえますか？', note:'Polite and clear. Works on anyone — counselors, teachers, staff, adults.', noteJp:'丁寧で分かりやすい。カウンセラー・先生・スタッフ、誰にでも使えます。'},
+       {en:'How do you say ___ in English?', jp:'___って英語で何て言うの？', note:'★ At this camp EVERYONE says this. You will hear it ten times a day. You are not the only one.', noteJp:'★このキャンプではみんなが言います。1日10回は聞くはず。あなただけじゃありません。'},
+       {en:'Hold on — one sec.', jp:'ちょっと待ってね。', note:'Buys you 3 seconds to think. Use it a lot.', noteJp:'考える3秒を稼げます。どんどん使って。'},
+       {en:"I don't know how to say it...", jp:'なんて言えばいいか分からない…', note:'Say this instead of going quiet. They will help you.', noteJp:'黙る代わりにこれ。相手が必ず助けてくれます。'}
+     ]},
+    {n:'Roommate', type:'phrases', h:'Your roommate', s:'You will share a room — double or triple, with a private bathroom. A stranger, on day one, in your bedroom. This is the scariest English of the week. It is also the most valuable.', jp:'2〜3人部屋（バスルーム付き）。初日から知らない人と同じ部屋。今週いちばん怖い英語。でも、いちばん価値のある英語です。',
+     items:[
+       {en:'Hey! Are you my roommate? I\'m Rina.', jp:'あ、ルームメイト？リナです。', note:'★ Say it FIRST. The person who speaks first is never the awkward one.', noteJp:'★先に言う。先に話しかけた人が「気まずい人」になることはありません。'},
+       {en:'Which bed do you want?', jp:'どっちのベッドがいい？', note:'The first real decision you make together. Ask — don\'t just take one.', noteJp:'2人で決める最初のこと。勝手に取らず、必ず聞く。'},
+       {en:'Do you mind if I ___?', jp:'___してもいい？', note:'★★ THE ROOMMATE PHRASE. Open the window? Turn off the light? Charge my phone? Use this for everything.', noteJp:'★★ルームメイトの最重要フレーズ。窓開けていい？電気消していい？充電していい？全部これ。'},
+       {en:'Is it okay if I turn off the light?', jp:'電気消してもいい？', note:'You will need this on night one. Learn it now.', noteJp:'初日の夜に必ず必要になります。今のうちに。'},
+       {en:'Are you going to breakfast?', jp:'朝ごはん行く？', note:'★ The single easiest way to not eat alone. Ask this every morning.', noteJp:'★一人で食べないための一番簡単な方法。毎朝これを聞く。'},
+       {en:"I'm gonna shower — do you need the bathroom first?", jp:'シャワー入るけど、先にトイレ使う？', note:'Small, thoughtful, and it makes you a great roommate instantly.', noteJp:'ちょっとした気遣い。一瞬で「いいルームメイト」になれます。'},
+       {en:'Sorry, am I being loud?', jp:'ごめん、うるさい？', note:'Better than apologizing later. Ask.', noteJp:'あとで謝るより先に聞く。'},
+       {en:'Good night! See you tomorrow.', jp:'おやすみ！また明日ね。', note:'★ Never just turn over and sleep in silence. Two seconds. It changes the whole week.', noteJp:'★黙って寝ない。2秒で言える。この2秒が一週間を変えます。'}
+     ]},
+    {n:'Dorm & Food', type:'phrases', h:'The dorm & dining hall', s:'Meals are buffet-style, on campus. Your floor has a lounge. Your adult is called a counselor, not a teacher.', jp:'食事はキャンパス内のビュッフェ。各フロアにラウンジ。あなたを見てくれる大人は「先生」ではなく「カウンセラー」。',
+     items:[
+       {en:'counselor', jp:'カウンセラー（引率スタッフ）', note:'★ NOT "teacher." Your counselor is the adult who looks after your group. Staff are on campus 24 hours.', noteJp:'★「先生」ではありません。グループを見てくれる大人＝counselor。スタッフは24時間キャンパスにいます。'},
+       {en:'the dining hall  /  the lounge', jp:'食堂／ラウンジ', note:'The two rooms you will live in. "Cafeteria" also works for the dining hall.', noteJp:'一番よくいる2つの場所。dining hall は cafeteria とも言います。'},
+       {en:'Can I sit here?', jp:'ここ座ってもいい？', note:'★★ THE BRAVEST SENTENCE OF THE WEEK. Four words. Say it and you have a table of friends.', noteJp:'★★今週いちばん勇気のいる一言。たった4語。これで友達のいるテーブルができます。'},
+       {en:'Is anyone sitting here?', jp:'ここ空いてる？', note:'The softer version. Just as good.', noteJp:'もう少しやわらかい言い方。同じくらい使えます。'},
+       {en:'What is that? Is it good?', jp:'それ何？おいしい？', note:'★ Buffet food you don\'t recognize = free conversation starter. Use it every meal.', noteJp:'★知らない料理＝ただの会話のきっかけ。毎食使えます。'},
+       {en:"I'll grab some water.  /  I'm gonna get more.", jp:'水取ってくる／おかわり取ってくる', note:'grab = さっと取る. Very natural, very common.', noteJp:'grab＝さっと取る。とても自然でよく使う言い方。'},
+       {en:'What time do we meet?', jp:'何時集合？', note:'You will ask this every single day.', noteJp:'毎日必ず聞くことになります。'},
+       {en:'Where are we going today?', jp:'今日どこ行くの？', note:'Excursions: Times Square, Central Park, Coney Island, the Bronx Zoo.', noteJp:'遠足：タイムズスクエア、セントラルパーク、コニーアイランド、ブロンクス動物園など。'}
+     ]},
+    {n:'Where From', type:'phrases', h:'"Where are you from?"', s:'At an international camp this is THE question. You will be asked it twenty times in three days. Nobody has heard of Toyooka — so have the answer ready and you will never freeze.', jp:'国際キャンプでは、これが最重要の質問。3日で20回は聞かれます。豊岡は誰も知らない。だから答えを用意しておけば、絶対に固まりません。',
+     items:[
+       {en:'Hey, I\'m Rina.', jp:'やあ、リナです。', note:'That\'s it. "My name is..." is fine, but stiffer.', noteJp:'これだけ。"My name is..." でもいいけど少し堅い。'},
+       {en:'I\'m from Japan — a city called Toyooka.', jp:'日本の豊岡というところから来ました。', note:'"a city called ___" = they know instantly you don\'t expect them to know it. Very natural.', noteJp:'「〜という町」＝相手が知らない前提だと伝わる。とても自然。'},
+       {en:'"Where\'s that?"  →  "It\'s in the countryside, near Kyoto."', jp:'「どこそれ？」→「田舎のほう。京都の近く」', note:'★ Have this loaded. Kyoto is your anchor — everyone in the world knows Kyoto.', noteJp:'★これを用意しておく。京都は世界中の誰もが知っている「目印」。'},
+       {en:"It's really small — you've definitely never heard of it.", jp:'すごく小さい町。絶対知らないと思う。', note:'★ Joke about it FIRST. Then you\'re never embarrassed by it.', noteJp:'★先に自分で笑いにする。そうすれば一度も恥ずかしくならない。'},
+       {en:'How about you? Where are you from?', jp:'そっちは？どこから来たの？', note:'★★ THE MAGIC MOVE. Answer, then throw the ball back. Every single time.', noteJp:'★★魔法の一手。答えたら必ず質問を返す。毎回です。'},
+       {en:'Oh, cool — how do you say hello in Portuguese?', jp:'いいね、ポルトガル語で「こんにちは」って何て言うの？', note:'★ At an international camp this ALWAYS works. Everyone loves teaching their language.', noteJp:'★国際キャンプでは必ずウケます。みんな自分の言語を教えたがります。'},
+       {en:'Is this your first time here too?', jp:'ここ来るの初めて？', note:'Your emergency question when your mind goes blank.', noteJp:'頭が真っ白になった時の非常用の質問。'}
+     ]},
+    {n:'Greetings', type:'phrases', h:'The "What\'s up?" trap', s:'"How are you?" is not a question — it is a greeting. Counselors and Americans will fire it at you constantly and walk away before you finish.', jp:'"How are you?" は質問ではなく挨拶。カウンセラーやアメリカ人は次々に言ってきて、答え終わる前に歩き去ります。',
+     items:[
+       {en:'Hey! / Hey, what\'s up?', jp:'やあ！（元気？ではなく、ただの「やあ」）', note:'The default teen greeting. Warmer than "Hello."', noteJp:'10代の定番の挨拶。"Hello" より温かい。'},
+       {en:'Not much, you?', jp:'ぼちぼち、そっちは？', note:'The answer to "What\'s up?" Or just say "Hey!" back.', noteJp:'"What\'s up?" への返事。"Hey!" と返すだけでもOK。'},
+       {en:"How's it going?  →  Good, you?", jp:'調子どう？ → いいよ、そっちは？', note:'Two seconds. Then move on.', noteJp:'2秒で終わり。すぐ次の話へ。'},
+       {en:'NOT: "I\'m fine, thank you. And you?"', jp:'これは教科書英語。ロボットみたいに聞こえます。', note:'Nobody says this. It marks you instantly as a textbook speaker.', noteJp:'誰も言いません。言った瞬間に「教科書英語の人」だと分かってしまいます。', warn:true},
+       {en:'You good?  →  Yeah, I\'m good.', jp:'大丈夫？→ うん、大丈夫。', note:'You will hear this from counselors all week.', noteJp:'カウンセラーから一週間ずっと聞くことになります。'}
+     ]},
+    {n:'Off Campus', type:'phrases', h:'Off campus', s:'Most meals are on campus — but on excursion days you will buy things. Chelsea Market, Coney Island, Times Square.', jp:'食事はほとんどキャンパス内。でも遠足の日は買い物をします。チェルシーマーケット、コニーアイランド、タイムズスクエア。',
+     items:[
+       {en:'Can I get a ___?', jp:'___をください。', note:'The most natural way to order. NOT "I want" (sounds like a child).', noteJp:'一番自然な注文の仕方。"I want" は子どもっぽく聞こえます。'},
+       {en:"I'm good, thanks.", jp:'大丈夫です（＝いりません）。', note:'★ How you say NO politely. Bag? Straw? Refill? → "I\'m good, thanks."', noteJp:'★丁寧な「NO」。袋は？ストローは？おかわりは？→全部これでOK。'},
+       {en:'For here.  /  To go.', jp:'店内で。／持ち帰りで。', note:'They will ask this every single time.', noteJp:'毎回必ず聞かれます。'},
+       {en:'You all set?  →  Yeah, I\'m good.', jp:'以上で大丈夫？→ はい、大丈夫です。', note:'"All set" = 終わった？／準備できた？ You will hear this everywhere.', noteJp:'"All set"＝終わった？／準備できた？ どこでも聞きます。'},
+       {en:'Card, please.', jp:'カードで。', note:'At a restaurant, tip on the screen: 18–20%. Not optional in the US.', noteJp:'レストランでは画面でチップを選びます。18〜20%。アメリカでは「任意」ではありません。'}
+     ]},
+    {n:'Slang', type:'sayknow', h:'Say it / Know it', s:'Two tiers. Green you use today. Yellow you only need to understand — for now.', jp:'2段階。緑は今日から使う。黄色は「聞いて分かればOK」。',
+     say:[
+       {en:'Hey', jp:'やあ'},{en:"What's up?", jp:'よお'},{en:'Sorry, what?', jp:'え、なんて？'},
+       {en:"I'm good", jp:'大丈夫（＝いらない）'},{en:'My bad', jp:'ごめん（軽く）'},{en:'One sec', jp:'ちょっと待って'},
+       {en:'Can I sit here?', jp:'ここ座っていい？'},{en:'Do you mind if I...?', jp:'〜してもいい？'}
+     ],
+     know:[
+       {en:"What's good?", jp:'＝What\'s up?'},{en:'How you doin\'?', jp:'＝元気？'},
+       {en:'You all set?', jp:'＝以上で大丈夫？'},{en:'You good?', jp:'＝大丈夫？→"Yeah, I\'m good."'},
+       {en:'No worries', jp:'＝気にしないで'},{en:'lights out', jp:'＝消灯（寮の門限・就寝時間）'},
+       {en:'roomie', jp:'＝roommate の愛称'}
+     ],
+     rule:'Heard it twice from a friend? Now you can use it.',
+     ruleJp:'友達から2回聞いたら、使ってOK。それまでは「聞くだけ」。'},
+    {n:'Dialogue', type:'dialogues', h:'Three dialogues', s:'Arrival day, from the door of your room to the dining hall.', jp:'到着日。部屋のドアから食堂まで。',
+     dlgs:[
+       {t:'① Meeting your roommate', turns:[
+         {s:'b',w:'Rina',en:"Hi! Um... are you my roommate? I'm Rina.",jp:'こんにちは！えっと…ルームメイト？リナです。'},
+         {s:'a',w:'Sofia',en:"Yes! Hi! I'm Sofia. I'm from Brazil.",jp:'そうだよ！ソフィアです。ブラジルから来たの。'},
+         {s:'b',w:'Rina',en:"Nice to meet you! I'm from Japan.",jp:'よろしく！私は日本から。'},
+         {s:'a',w:'Sofia',en:"Oh, cool! Sorry, my English is not so good.",jp:'いいね！ごめん、英語あんまり上手じゃなくて。'},
+         {s:'b',w:'Rina',en:"Haha, me too! Um... which bed do you want?",jp:'あはは、私も！えっと…どっちのベッドがいい？'},
+         {s:'a',w:'Sofia',en:"I don't mind. You choose!",jp:'どっちでもいいよ。選んで！'},
+         {s:'b',w:'Rina',en:"Okay... this one? Do you mind if I open the window?",jp:'じゃあ…こっち？窓開けてもいい？'},
+         {s:'a',w:'Sofia',en:"Sure, it's hot! Hey — are you going to dinner?",jp:'いいよ、暑いもんね！ねえ、夕ごはん行く？'},
+         {s:'b',w:'Rina',en:"Yes! Can I come with you?",jp:'行く！一緒に行ってもいい？'},
+         {s:'a',w:'Sofia',en:"Of course! Let's go.",jp:'もちろん！行こう。'}
+       ]},
+       {t:'② The dining hall — the bravest four words', turns:[
+         {s:'b',w:'Rina',en:'Um... hi. Can I sit here?',jp:'えっと…こんにちは。ここ座ってもいい？'},
+         {s:'a',w:'Luca',en:'Yeah, sure! Sit down.',jp:'うん、もちろん！座って。'},
+         {s:'b',w:'Rina',en:"Thanks. I'm Rina.",jp:'ありがとう。リナです。'},
+         {s:'a',w:'Luca',en:"Luca. I'm from Italy. Where are you from?",jp:'ルカ。イタリアから来た。どこから？'},
+         {s:'b',w:'Rina',en:"Japan — a city called Toyooka. You've definitely never heard of it.",jp:'日本の豊岡ってところ。絶対知らないと思う。'},
+         {s:'a',w:'Luca',en:'Haha, no! Where is it?',jp:'あはは、知らない！どこにあるの？'},
+         {s:'b',w:'Rina',en:"It's in the countryside, near Kyoto. What is that? Is it good?",jp:'田舎のほう、京都の近く。それ何？おいしい？'},
+         {s:'a',w:'Luca',en:"This? Mac and cheese. It's... okay. Try it!",jp:'これ？マカロニチーズ。まあ…ふつう。食べてみて！'},
+         {s:'b',w:'Rina',en:"Okay! Oh — how do you say hello in Italian?",jp:'うん！あ、イタリア語で「こんにちは」って何て言うの？'},
+         {s:'a',w:'Luca',en:'Ciao! Easy, right?',jp:'チャオ！簡単でしょ？'}
+       ]},
+       {t:'③ Excursion day — a coffee shop', turns:[
+         {s:'a',w:'Staff',en:'Hi, what can I get for you?',jp:'いらっしゃいませ、何にしますか？'},
+         {s:'b',w:'Rina',en:'Um... can I get an iced tea?',jp:'えっと…アイスティーをください。'},
+         {s:'a',w:'Staff',en:'Sure. Small, medium, or large?',jp:'かしこまりました。S、M、L？'},
+         {s:'b',w:'Rina',en:'Sorry, what?',jp:'え、なんて？'},
+         {s:'a',w:'Staff',en:'What size?',jp:'サイズは？'},
+         {s:'b',w:'Rina',en:'Oh! Medium, please.',jp:'あ！Mでお願いします。'},
+         {s:'a',w:'Staff',en:'For here or to go?',jp:'店内ですか、お持ち帰り？'},
+         {s:'b',w:'Rina',en:'To go, please.',jp:'持ち帰りで。'},
+         {s:'a',w:'Staff',en:'You all set?',jp:'以上で大丈夫？'},
+         {s:'b',w:'Rina',en:"Sorry — what's that mean?",jp:'すみません、それどういう意味ですか？'},
+         {s:'a',w:'Staff',en:'Is that everything?',jp:'それで全部？'},
+         {s:'b',w:'Rina',en:"Yes — I'm good. Thank you!",jp:'はい、大丈夫です。ありがとう！'}
+       ]}
+     ]},
+    {n:'Review', type:'cloze', h:'Quick check', s:'Tap the answer. Wrong is fine — that\'s how you learn it.', jp:'答えをタップ。間違えてOK、それで覚えます。',
+     qs:[
+       {sit:'You meet your roommate for the first time.', txt:'You say: ____', o:["Hey! Are you my roommate? I'm Rina.","Hello. I am Rina. Nice to meet you.","..."], a:0,
+        ws:['','Not wrong — but stiff and formal, like a textbook. For a girl your age sharing a bedroom, it lands cold.','Silence. The most tempting option, and the worst one. Whoever speaks first is never the awkward one.'],
+        wsJp:['','間違いではありませんが、教科書のように堅い。同じ部屋で寝る同い年の子には冷たく響きます。','沈黙。一番選びたくなって、一番よくない選択。先に話しかけた人が「気まずい人」になることはありません。'],
+        why:'Speak first. It costs two seconds and it decides the whole week.',
+        whyJp:'先に話しかける。2秒で終わるのに、一週間が決まります。'},
+       {sit:'You want to open the window. Sofia is in the room.', txt:'____ if I open the window?', o:['Do you mind','Do you want','Are you okay'], a:0,
+        ws:['','That asks whether SHE wants to open it — not whether it is okay with her.','"Are you okay if I..." is not natural English. The set phrase is "Do you mind if I...?"'],
+        wsJp:['','それだと「あなたが窓を開けたい？」という意味になります。許可を求めていません。','"Are you okay if I..." は自然な英語ではありません。決まった形は "Do you mind if I...?"'],
+        why:'"Do you mind if I ___?" is THE roommate phrase. Light, window, phone, shower — everything.',
+        whyJp:'"Do you mind if I ___?" がルームメイトの最重要フレーズ。電気・窓・充電・シャワー、全部これ。'},
+       {sit:'The dining hall. A table of campers you do not know.', txt:'You say: ____', o:['Can I sit here?','Excuse me, is this seat free for me?','(sit somewhere alone)'], a:0,
+        ws:['','Understandable, but long and formal. Four words is braver AND more natural: "Can I sit here?"','This is the choice that makes the whole week lonely. Four words is all it takes to avoid it.'],
+        wsJp:['','通じますが、長くて堅い。4語のほうが自然で、勇気も伝わります。','これを選ぶと一週間ずっと一人になります。避けるのに必要なのは、たった4語です。'],
+        why:'Four words. It is the bravest and most useful sentence of the week.',
+        whyJp:'たった4語。今週いちばん勇気がいって、いちばん役に立つ一言です。'},
+       {sit:'Someone says "What\'s up?"', txt:'You say: ____', o:['Not much, you?','I am fine, thank you.','Yes.'], a:0,
+        ws:['','This is the textbook answer — and it instantly marks you as a textbook speaker. No teenager says it.','"What\'s up?" is not a yes/no question. It just means "hi." There is nothing to say yes to.'],
+        wsJp:['','これは教科書の答え。言った瞬間に「教科書英語の人」だと分かってしまいます。10代は誰も言いません。','"What\'s up?" はYES/NOで答える質問ではありません。ただの「やあ」です。'],
+        why:'"What\'s up?" is a greeting, not a question. "Not much, you?" — or just "Hey!" back.',
+        whyJp:'"What\'s up?" は質問じゃなくて挨拶。"Not much, you?" か、"Hey!" と返すだけでOK。'},
+       {sit:'You did not hear them.', txt:"Sorry, I didn't ____ that.", o:['catch','listen','hear to'], a:0,
+        ws:['','"Listen" is something you CHOOSE to do. This is about failing to hear — that needs "catch."','"Hear to" is not English. The natural word is "catch."'],
+        wsJp:['','listen は「自分から聞こうとする」こと。ここは「聞き取れなかった」なので catch を使います。','"hear to" は英語として存在しません。自然なのは catch です。'],
+        why:'catch = 聞き取る. This is the phrase natives actually use.',
+        whyJp:'catch＝聞き取る。ネイティブが実際に使う言い方です。'},
+       {sit:'There is food on the buffet you do not recognize.', txt:'You say: ____', o:['What is that? Is it good?','(take nothing and say nothing)','What is the name of this food, please?'], a:0,
+        ws:['','A free conversation is sitting right in front of you and you walked past it. Unknown food is the easiest question in the world.','Too formal — it sounds like an interview. "What is that? Is it good?" is warmer and invites an opinion.'],
+        wsJp:['','目の前にある「無料の会話のきっかけ」を素通りしています。知らない料理ほど聞きやすいものはありません。','堅すぎてインタビューみたい。"What is that? Is it good?" のほうが温かく、相手の意見も引き出せます。'],
+        why:'Unknown buffet food = a free conversation starter. Use it at every single meal.',
+        whyJp:'知らないビュッフェ料理＝ただの会話のきっかけ。毎食使えます。'},
+       {sit:'The adult looking after your group is called a...', txt:'____', o:['counselor','teacher','manager'], a:0,
+        ws:['','Your ESL teacher teaches your class. The adult who looks after your group outside class is a counselor.','Not used for people at a camp. "Counselor" is the word.'],
+        wsJp:['','teacher は授業を教える先生。授業以外であなたのグループを見てくれる大人は counselor です。','キャンプでは人に対して使いません。正しいのは counselor。'],
+        why:'counselor = 引率スタッフ. Staff are on campus 24 hours a day. Learn the word tonight.',
+        whyJp:'counselor＝引率スタッフ。スタッフは24時間キャンパスにいます。今夜のうちに覚えて。'},
+       {sit:'You do not want a bag at the shop.', txt:'You say: ____', o:["I'm good, thanks.","No, I don't want.","I am okay?"], a:0,
+        ws:['','Incomplete, and it lands blunt — almost rude. Natives just do not say this.','This sounds like you are asking a question about your own feelings. The cashier will be confused.'],
+        wsJp:['','文が途中で、しかもぶっきらぼう。ほぼ失礼に聞こえます。ネイティブはこう言いません。','自分の気分を質問しているように聞こえます。店員さんは困ってしまいます。'],
+        why:'"I\'m good, thanks" is the polite, natural NO. Use it constantly.',
+        whyJp:'"I\'m good, thanks" が自然で丁寧な「NO」。何にでも使えます。'}
+     ]},
+    {n:'Culture', type:'culture', h:'What will surprise you', s:'Just listen for this one. No speaking.', jp:'ここは聞くだけ。話さなくて大丈夫。',
+     items:[
+       {t:'Nobody speaks perfect English. Nobody.', d:'Your friends will be Brazilian, Italian, Turkish, Korean. They will have strong accents and make mistakes in every sentence — and they will keep talking anyway. Copy THAT, not their grammar.', jp:'友達はブラジル人、イタリア人、トルコ人、韓国人。強い訛りがあって、毎文間違えて、それでも話し続けます。真似すべきなのは文法ではなく、その「話し続ける態度」です。'},
+       {t:'Do not compare your English to theirs.', d:'Some campers will be louder and faster than you. That is personality, not ability. Your Eiken level is fine. The only thing that matters is whether you open your mouth.', jp:'あなたより声が大きくて早口の子もいます。それは英語力ではなく性格。英検の級は関係ありません。大事なのは口を開くかどうかだけ。'},
+       {t:'"How are you?" is not a question.', d:'Counselors, staff, a stranger in an elevator — they all ask. They do not want a real answer. Say "Good, you?" and move on.', jp:'カウンセラーもスタッフも、エレベーターの他人も聞いてきます。本当の答えは求めていません。'},
+       {t:'Silence in a shared room is heavy.', d:'In Japan, quiet is polite. In a dorm room, silence feels like anger — your roommate will think you dislike her. Say "Good night!" every night. Two seconds.', jp:'日本では静かなのが礼儀。でも同じ部屋では、沈黙は「怒っている」ように感じられます。「嫌われてる？」と思われます。毎晩「おやすみ」を。2秒です。'},
+       {t:'Stop saying sorry.', d:'Use "Excuse me" to pass someone. Save "sorry" for real mistakes. Late? Say "Thanks for waiting!" — not "I\'m so sorry."', jp:'人の前を通るときは Excuse me。遅れたときは「ごめん」より「待っててくれてありがとう」。'}
+     ]},
+    {n:'Free Talk', type:'free', h:'Free talk', s:'Tap the card. Do the task. The phrase list stays on screen — use it.', jp:'カードをタップして、そのタスクをやる。フレーズを見ながらでOK。',
+     cards:[
+       {t:'I am your new roommate. I am already in the room. Come in and introduce yourself.', jp:'私はあなたの新しいルームメイト。もう部屋にいます。入ってきて自己紹介してください。'},
+       {t:'You want the bed by the window, and you want the light off at 11. Ask me — do not just decide.', jp:'窓側のベッドがよくて、11時に電気を消したい。勝手に決めず、私に聞いてください。'},
+       {t:'I am sitting alone in the dining hall. Come and sit with me.', jp:'私は食堂で一人で座っています。来て、一緒に座ってください。'},
+       {t:'I ask: "Where are you from?" Answer, survive "where IS that?", and ask me back.', jp:'「どこ出身？」と聞きます。答えて、「どこそれ？」を乗り切って、質問を返して。'},
+       {t:'I am a camper from Brazil. My English is bad and I speak fast. Get through a two-minute conversation.', jp:'私はブラジルから来たキャンパー。英語が下手で早口です。2分間の会話を乗り切って。'},
+       {t:'Point at food on my plate. Ask what it is. Then keep the conversation going for 30 seconds.', jp:'私のお皿の料理を指さして「それ何？」と聞いて。そこから30秒会話を続けてください。'},
+       {t:'I will say a strange word. Do NOT nod. Ask me what it means.', jp:'変な単語を言います。うなずかないで。意味を聞いてください。'},
+       {t:'You are lost on campus and can\'t find your dorm. Ask me for help.', jp:'キャンパスで迷子。寮が見つからない。助けを求めてください。'}
+     ],
+     helper:'Sorry, what? · Say that again? · What\'s ___ mean? · Do you mind if I...? · Can I sit here? · What is that? Is it good? · How about you?'},
+    {n:'Mission', type:'metro', h:'This week', lab:'Mission 01',
+     doThis:'Say "Can I sit here?" to a table of strangers.', jp:'知らない人のテーブルに「ここ座ってもいい？」と言う。1日1回。',
+     foot:'Use this way · Four words, once a day', footJp:'たった4語。1日1回でいい。'}
+  ]
+},
+{
+  id:'L2', bullet:'A', color:'var(--lineA)', dark:false,
+  name:'Hanging Out',
+  stops:[
+    {n:'Mission', type:'mission', h:'Keep it alive.', s:'This is the hour that actually matters. Conversation with your friends — reacting, asking back, making plans.', jp:'実はこの1時間が一番大事。友達との会話 —— 反応する、質問を返す、予定を立てる。',
+     pts:[
+       {t:'The other campers are your practice ground.', d:'They are learners too. They will not judge your grammar — they are busy worrying about their own. This is the safest room you will ever speak in. The only real danger is other Japanese campers: the moment you slip into Japanese together, the week is wasted.', jp:'他のキャンパーも学習者。文法をジャッジする余裕なんてありません（自分のことで必死）。世界一安全な部屋です。唯一の危険は、他の日本人キャンパーと日本語に戻ってしまうこと。'},
+       {t:'Reacting is 50% of talking.', d:'あいづち already exists in you. You just need the English words. Silent nodding reads as "I am bored" in almost every culture at this camp.', jp:'あいづちの感覚はもう持っている。英語の言葉を入れるだけ。黙ってうなずくと、どの国の子にも「退屈そう」に見えます。'},
+       {t:'Answer + Ask. Every time.', d:'The single rule that makes you a good conversation partner. Answer their question, then ask one back.', jp:'答えたら、必ず質問を返す。この1つのルールだけで会話上手になります。'},
+       {t:'Closeness is shown, not announced.', d:'In English you never say "let\'s be friends." You ask questions, you laugh, and then you invite them somewhere. That is the whole technique.', jp:'英語では「友達になろう」とは言いません。質問して、笑って、誘う。それだけです。'}
+     ]},
+    {n:'Reactions', type:'phrases', h:'Reactions = English あいづち', s:'Say them OUT LOUD. Louder than feels natural. Less often than in Japanese, but with more energy.', jp:'声に出して。日本語より回数は少なく、でもエネルギーは大きく。',
+     items:[
+       {en:'Oh really?', jp:'そうなんだ！', note:'The workhorse. Use it 20 times a day.', noteJp:"主力のあいづち。1日20回使ってOK。"},
+       {en:'For real?  /  Seriously?', jp:'まじで？', note:'sounds like → "f\'real?"', noteJp:"実際の音は「フリアォ？」に近い。"},
+       {en:'No way!', jp:'うそー！', note:'For genuine surprise. Big energy.', noteJp:"本気で驚いた時。大きめのリアクションで。"},
+       {en:'Same.', jp:'わかる／私も。', note:'★ One word. Instant connection. Extremely teen.', noteJp:"★たった1語で一気に距離が縮まる。とても10代っぽい表現。"},
+       {en:'Right?!', jp:'たしかに！／だよね！', note:'Agreeing hard. Say it fast.', noteJp:"強く共感する時。速く言う。"},
+       {en:"That's so cool.  /  Nice.", jp:'いいね！', note:'"Nice." on its own is a complete sentence.', noteJp:"\"Nice.\" は1語で完全な文になります。"},
+       {en:"Aww, that sucks.", jp:'えー、それはつらいね。', note:'For bad news. "That sucks" is normal, not a bad word.', noteJp:"悪いニュースへの反応。\"That sucks\" は下品な言葉ではありません。"},
+       {en:"That's crazy.", jp:'やばいね。', note:'Good OR bad. Extremely common.', noteJp:"良い時も悪い時も使える。超頻出。"}
+     ]},
+    {n:'Follow-ups', type:'phrases', h:'The follow-up question', s:'A reaction keeps you in. A question keeps them talking — and takes the pressure off you.', jp:'反応で会話に残る。質問で相手に話させる → あなたのプレッシャーが減る。',
+     items:[
+       {en:'Wait, really? What happened?', jp:'え、まじで？何があったの？'},
+       {en:'How come?', jp:'なんで？', note:'Softer and more natural than a bare "Why?"', noteJp:"ただの \"Why?\" よりやわらかくて自然。"},
+       {en:'What was it like?', jp:'どんな感じだった？', note:'★ Works for ANY story. Your emergency question.', noteJp:"★どんな話にも使える。困った時の非常用の質問。"},
+       {en:'And then what?', jp:'それでどうなったの？', note:'Keeps a story rolling with zero effort.', noteJp:"労力ゼロで話を続けさせられます。"},
+       {en:'Since when?', jp:'いつから？'},
+       {en:'Wait, you\'ve been to Japan?', jp:'え、日本行ったことあるの？', note:'Pattern: "Wait, you ___?" = surprised follow-up.', noteJp:"型：\"Wait, you ___?\"＝驚いた時の追加質問。"}
+     ]},
+    {n:'Getting Closer', type:'phrases', h:'"I want to get to know you"', s:'Careful — the direct translation is a trap. In English you do not DECLARE closeness. You show it, then you make a plan.', jp:'★ 直訳は危険。英語では「仲良くなりたい」と宣言せず、行動で示して、最後に予定を作ります。',
+     items:[
+       {en:'✗ "I want to get to know you better." (one-on-one)', jp:'1対1で言うと「恋愛の告白」に聞こえます。', note:'Grammatically perfect. But said alone to one person — especially a boy — it sounds romantic. Not what you mean.', noteJp:"文法は完璧。でも1対1、特に男子に言うと恋愛の告白に聞こえます。", warn:true},
+       {en:'✗ "Let\'s be friends!"', jp:'英語では子どもっぽいか、逆に「フラれる時」の言葉です。', note:'友達になろう is normal in Japanese. In English this is either childish, OR it is the rejection line ("I just want to be friends"). Never use it.', noteJp:"日本語の「友達になろう」は自然。でも英語では子どもっぽいか、「ごめん、友達のままで」というフラれる時の言葉。使わないこと。", warn:true},
+       {en:'✓ "I wanna get to know you guys better."', jp:'みんなともっと仲良くなりたい。', note:'★ "you guys" makes it plural and warm. Zero romantic reading. This is your safe direct version.', noteJp:"★\"you guys\" にすれば複数形になり、恋愛っぽさが消えます。安全な直球版。"},
+       {en:'Okay, I have so many questions.', jp:'質問めっちゃある！', note:'★★ THE BEST ONE FOR YOU. Playful, and it hands the talking over to them. Your favorite move.', noteJp:"★★あなたに一番おすすめ。軽やかで、しかも相手に話させられます。"},
+       {en:'Tell me more about that!', jp:'もっと聞かせて！', note:'Shows interest without saying anything heavy.', noteJp:"重いことを言わずに「興味あるよ」を伝えられます。"},
+       {en:"You're so easy to talk to.", jp:'話しやすいね。', note:'Day 2 or 3. A real compliment. People light up.', noteJp:"2〜3日目に。本物のほめ言葉。相手の顔が明るくなります。"},
+       {en:'We should hang out more!', jp:'もっと一緒にいたいな。', note:'Warm — but often just social noise. See the next line.', noteJp:"温かいけれど、ただの社交辞令のことも多い。次の行を見て。"},
+       {en:'Are you free tomorrow?', jp:'明日ひま？', note:'★ THIS is the real 親しみたい. Not a sentence about closeness — an actual invitation. Name a time and it becomes real.', noteJp:"★これが本当の「親しみたい」。宣言ではなく、実際の誘い。日時を決めれば本物になります。"}
+     ]},
+    {n:'Plans', type:'phrases', h:'Making plans', s:'This is the language of the whole week — where, when, who, food.', jp:'一週間ずっと使う言葉。どこ・いつ・誰と・ごはん。',
+     items:[
+       {en:'Wanna go get food?', jp:'ごはん食べに行かない？', note:'wanna = want to. Everyone says it. Always.', noteJp:"wanna＝want to。みんな必ずこう言います。"},
+       {en:"I'm down.", jp:'いいね、行く！', note:'★ = OK, I want to. NOT "I\'m up."', noteJp:"★「行く！いいね」の意味。\"I'm up.\" ではありません。"},
+       {en:"Let's just walk.", jp:'歩いちゃお。', note:'"just" softens everything. Very teen.', noteJp:"\"just\" は何でもやわらげます。とても10代っぽい。"},
+       {en:'Are you coming?', jp:'来る？'},
+       {en:"I'll meet you in the lounge.", jp:'ラウンジで待ち合わせね。', note:'Your floor has a lounge. This is where everyone hangs out. Learn the word now.', noteJp:'寮の各フロアにラウンジがあります。みんなが集まる場所。今のうちに覚えて。'},
+       {en:"I'm gonna be like five minutes.", jp:'あと5分くらい！', note:'"like" = だいたい. Not slang — everyone uses it.', noteJp:"\"like\"＝だいたい。スラングではなく、みんな使います。"},
+       {en:'Wait for me!', jp:'待って！'}
+     ]},
+    {n:'Opinions', type:'phrases', h:'Opinions & saying no (nicely)', s:'"I disagree" is too strong for friends. Soften everything — that\'s what teens do.', jp:'"I disagree" は友達には強すぎる。やわらかく言うのが自然。',
+     items:[
+       {en:"It's kinda boring, honestly.", jp:'正直、ちょっと退屈かも。', note:'kinda + honestly = the two great softeners.', noteJp:"kinda と honestly＝二大「やわらげワード」。"},
+       {en:"It's not really my thing.", jp:'あんまり得意じゃないかな。', note:'★ Perfect polite "no" for food, music, activities.', noteJp:"★食べ物・音楽・遊びを断る時の、完璧な「NO」。"},
+       {en:'Yeah, but...', jp:'うん、でも…', note:'How to disagree without a fight. Always agree first.', noteJp:"けんかにならない反対の仕方。まず同意してから。"},
+       {en:'I guess?', jp:'まあ…そうかな？', note:'Uncertain agreement. Rising tone.', noteJp:"自信のない同意。語尾を上げて言う。"},
+       {en:"Hmm, I don't know about that.", jp:'うーん、どうかなあ。', note:'Gentle disagreement.', noteJp:"やんわりした反対。"},
+       {en:"Honestly? I'm exhausted.", jp:'正直、めっちゃ疲れた。', note:'"Honestly?" at the start = I\'m being real with you.', noteJp:"文頭の \"Honestly?\"＝「本音を言うとね」。"}
+     ]},
+    {n:'English Pact', type:'phrases', h:'The English-only pact', s:'THIS is why most students come home with zero improvement. Everyone slips back into Japanese. You need the phrases to stop it.', jp:'★ ほとんどの生徒が上達しない理由がこれ。みんな日本語に戻る。止めるフレーズが必要。',
+     items:[
+       {en:'English only, okay?', jp:'英語だけね？', note:'Say it at breakfast. Set the rule for the day.', noteJp:"朝ごはんの時に言う。その日のルールを決めてしまう。"},
+       {en:'Wait — English!', jp:'ちょっと、英語！', note:'Short. Friendly. Say it with a laugh.', noteJp:"短く、親しみを込めて。笑いながら言うのがコツ。"},
+       {en:'Say it in English!', jp:'英語で言って！'},
+       {en:'How do you say that in English?', jp:'それ英語で何て言うの？', note:'Turns a slip into a lesson. Everybody wins.', noteJp:"日本語が出ちゃった瞬間を、勉強に変えられます。全員得。"},
+       {en:'One more time — in English.', jp:'もう一回、英語で。'},
+       {en:'Five more minutes of English. Then Japanese.', jp:'あと5分だけ英語。そのあと日本語ね。', note:'A deal your friends will actually accept.', noteJp:"友達が実際にのってくれる、現実的な取引の仕方。", warn:true}
+     ]},
+    {n:'Slang', type:'sayknow', h:'Say it / Know it', s:'Green = use today. Yellow = you will hear this constantly. Understand it, don\'t say it yet.', jp:'緑＝今日から使う。黄色＝よく聞くけど、まだ使わない。',
+     say:[
+       {en:'Same.', jp:'わかる'},{en:'For real?', jp:'まじで？'},{en:'No way!', jp:'うそー'},
+       {en:"I'm down", jp:'行く！'},{en:'kinda', jp:'ちょっと'},{en:'honestly', jp:'正直'},
+       {en:'wanna', jp:'〜したい'},{en:'That sucks.', jp:'つらいね'}
+     ],
+     know:[
+       {en:'lowkey', jp:'ちょっと／密かに ("I lowkey wanna leave")'},
+       {en:'no cap', jp:'まじで、うそじゃない'},
+       {en:'bet', jp:'了解！／いいね'},
+       {en:"that's fire", jp:'最高'},
+       {en:"it's giving ___", jp:'〜の雰囲気ある'},
+       {en:'she ate', jp:'完璧だった'},
+       {en:'delulu', jp:'妄想がすごい（冗談で）'}
+     ],
+     rule:'Heard it twice from a friend? Now you can use it.',
+     ruleJp:'いきなり使うと「無理してる感」が出ます。2回聞いてから。'},
+    {n:'Dialogue', type:'dialogues', h:'Two dialogues', s:'The first is with another Japanese camper. The second is with your camp friends. Notice how short the turns are.', jp:'1つ目は他の日本人キャンパーと。2つ目はキャンプの友達と。一回の発言が短いことに注目。',
+     dlgs:[
+       {t:'① With another Japanese camper — the pact', turns:[
+         {s:'a',w:'Rin',en:'Rina, 今日どこ行く—',jp:'（日本語に戻った！）'},
+         {s:'b',w:'Rina',en:'Wait — English!',jp:'ちょっと、英語！'},
+         {s:'a',w:'Rin',en:'Ah, sorry! Um... where we go today?',jp:'あ、ごめん！えっと…今日どこ行く？'},
+         {s:'b',w:'Rina',en:'"Where should we go today?"',jp:'（正しい言い方を教えてあげる）'},
+         {s:'a',w:'Rin',en:'Where should we go today?',jp:'今日どこ行こうか？'},
+         {s:'b',w:'Rina',en:'I wanna see Times Square. You down?',jp:'タイムズスクエア行きたい。行く？'},
+         {s:'a',w:'Rin',en:"I'm down. But honestly, I'm kinda tired.",jp:'行く。でも正直ちょっと疲れた。'},
+         {s:'b',w:'Rina',en:"Same. Let's just get food first.",jp:'わかる。とりあえずごはん食べよ。'},
+         {s:'a',w:'Rin',en:'Okay. What time?',jp:'オッケー。何時？'}
+       ]},
+       {t:'② With your camp friends — react, then ask', turns:[
+         {s:'a',w:'Sam',en:'So we walked like 20 blocks and then it started raining.',jp:'20ブロックくらい歩いたら雨が降ってきてさ。'},
+         {s:'b',w:'Rina',en:'No way. Did you have an umbrella?',jp:'うそー。傘持ってた？'},
+         {s:'a',w:'Sam',en:'Nope. We were soaked.',jp:'ううん。びしょ濡れ。'},
+         {s:'b',w:'Rina',en:"Aww, that sucks. And then what?",jp:'えー、つらい。それでどうなったの？'},
+         {s:'a',w:'Sam',en:'We just went into a Starbucks and waited.',jp:'スタバに入って待ってた。'},
+         {s:'b',w:'Rina',en:'Smart. Honestly, same thing happened to me in Kyoto.',jp:'かしこい。正直、京都で同じことあった。'},
+         {s:'a',w:'Sam',en:"Wait, really? What was it like?",jp:'え、まじで？どんな感じだった？'},
+         {s:'b',w:'Rina',en:'So crowded. But the rain was kinda pretty.',jp:'めっちゃ混んでた。でも雨はちょっときれいだった。'}
+       ]}
+     ]},
+    {n:'Review', type:'cloze', h:'Quick check', s:'Tap the answer.', jp:'答えをタップ。',
+     qs:[
+       {sit:'Your friend says "I failed my test."', txt:'You say: ____', o:['Aww, that sucks.','Oh, good.','Congratulations.'], a:0,
+        ws:['','This is BAD news. "Oh, good" sounds like you are happy she failed.','You just congratulated her on failing. Always listen for the emotion, not only the words.'],
+        wsJp:['','これは悪いニュースです。"Oh, good" だと「落ちてよかったね」に聞こえます。','テストに落ちたことをお祝いしてしまっています。単語だけでなく「感情」を聞き取って。'],
+        why:'"That sucks" is the standard, friendly reaction to bad news. It is not a rude word.',
+        whyJp:'"That sucks" は悪いニュースへの定番の反応。失礼な言葉ではありません。'},
+       {sit:'You want to invite your friend for food. Casual.', txt:'____ go get food?', o:['Wanna','Do you want to you','You want'], a:0,
+        ws:['','You repeated "you." "Do you want to go..." is correct — but "Wanna" is what people actually say.','Missing "to," and missing the question form. "Wanna" fixes both at once.'],
+        wsJp:['','you が2回入っています。"Do you want to go..." なら正しいですが、実際にみんなが言うのは "Wanna"。','to が抜けていて、疑問文の形にもなっていません。"Wanna" なら一発で解決します。'],
+        why:'wanna = want to. This is what everyone actually says.',
+        whyJp:'wanna＝want to。実際にみんなが使う形です。'},
+       {sit:'Your friend invites you somewhere. You want to go.', txt:'You say: ____', o:["I'm down.","I'm up.","I'm in the down."], a:0,
+        ws:['','"I\'m up" is not a phrase. Down means yes. This one just has to be memorized.','Not English. The whole phrase is only two words: "I\'m down."'],
+        wsJp:['','"I\'m up" という言い方はありません。down が「YES」。これは丸暗記するしかない表現です。','英語として存在しません。フレーズは2語だけ："I\'m down."'],
+        why:'"I\'m down" = いいね、行く. Remember: down, not up.',
+        whyJp:'"I\'m down"＝「いいね、行く」。up ではなく down。'},
+       {sit:'You think the museum is boring — but you want to be gentle.', txt:"It's ____ boring.", o:['kinda','very much','too so'], a:0,
+        ws:['','"Very much" does not go before an adjective like this — and it makes your opinion STRONGER, not softer.','Not English. "Too" and "so" cannot be stacked together.'],
+        wsJp:['','"very much" は形容詞の前には置けません。しかも意見が「やわらかく」ではなく「強く」なってしまいます。','英語として成立しません。too と so は重ねて使えません。'],
+        why:'kinda softens everything. It is the most teenage word in English.',
+        whyJp:'kinda は何でもやわらげます。英語で一番「10代っぽい」単語です。'},
+       {sit:'Your Japanese friend starts speaking Japanese.', txt:'Wait — ____!', o:['English','speak','Japanese'], a:0,
+        ws:['','"Wait — speak!" sounds like an order, and it does not say which language you mean.','That is the opposite of what you want! You are trying to STOP the Japanese.'],
+        wsJp:['','"Wait — speak!" は命令みたいで、しかもどの言語かも伝わりません。','やりたいことの正反対です。日本語を「止めたい」のに、日本語を求めています。'],
+        why:'Two words. Say it with a laugh. This is the phrase that saves your whole trip.',
+        whyJp:'たった2語。笑いながら言うのがコツ。旅行全体を救うフレーズです。'},
+       {sit:'Your friend says she met a famous singer.', txt:'You say: ____', o:['No way!','No, thank you.','That is bad.'], a:0,
+        ws:['','That is a polite refusal — you are saying no to an offer. She is telling you exciting news.','It is not bad news, it is surprising news. And this sounds flat, like a robot reading a sentence.'],
+        wsJp:['','これは「結構です」と何かを断る表現。相手はワクワクする話をしているだけです。','悪いニュースではなく、驚きのニュースです。それに、ロボットが読み上げたように平坦に聞こえます。'],
+        why:'Big surprise = big energy. Silent nodding reads as "I don\'t care."',
+        whyJp:'大きな驚きには大きなリアクション。黙ってうなずくと「興味ない」に見えます。'},
+       {sit:'You like your new camp friends and want to be closer.', txt:'You say: ____', o:["I wanna get to know you guys better.","Let's be friends!","I want to get to know you better."], a:0,
+        ws:['','友達になろう is normal in Japanese — but in English this is childish, or worse, it is the REJECTION line ("I just want to be friends").','Grammatically perfect, but said to one person alone it sounds romantic. Add "you guys" to fix it.'],
+        wsJp:['','日本語の「友達になろう」は自然ですが、英語では子どもっぽいか、最悪「ごめん、友達のままで」というフラれる時の言葉になります。','文法は完璧ですが、1対1で言うと恋愛の告白に聞こえます。"you guys" を足せば解決します。'],
+        why:'"You guys" makes it plural and warm — no romantic reading. Or skip the declaration entirely and just say "Are you free tomorrow?"',
+        whyJp:'"you guys" にすれば複数形になって、恋愛っぽさが消えます。または宣言せずに「明日ひま？」と誘うのが一番自然。'},
+       {sit:'You just answered their question. What do you do next?', txt:'You ____.', o:['ask one back','stay quiet','say sorry'], a:0,
+        ws:['','This is the freeze. Silence makes the other person do all the work — and eventually they stop trying.','You did nothing wrong! Apologizing here confuses people and makes the conversation heavy.'],
+        wsJp:['','これが「フリーズ」です。黙ると相手が全部がんばることになり、やがて話しかけてこなくなります。','あなたは何も悪いことをしていません。ここで謝ると相手は混乱し、会話が重くなります。'],
+        why:'Answer + Ask. Every single time. This one rule makes you a great conversation partner.',
+        whyJp:'「答える＋質問を返す」。毎回です。このルール1つで会話上手になれます。'}
+     ]},
+    {n:'Culture', type:'culture', h:'Why conversations feel strange', s:'Listen only. Some of this is American. Some of it is just "not Japanese."', jp:'聞くだけ。アメリカ特有のものもあれば、単に「日本とは違う」だけのものもあります。',
+     items:[
+       {t:'Silence is uncomfortable — almost everywhere but Japan.', d:'Three seconds of quiet and they think something is wrong. Brazilian, Italian, American — none of them have the Japanese 間. Fill the gap with a question.', jp:'3秒黙るだけで「なんかあった？」と思われます。ブラジル人もイタリア人もアメリカ人も、日本の「間」を持っていません。質問で埋めて。'},
+       {t:'Interrupting is friendly.', d:'They will cut in while you are speaking. It means "I am excited, I am listening." It is not rude and they are not angry. You may interrupt them too.', jp:'話をさえぎってきます。それは「興味あるよ」のサイン。怒っていません。あなたもさえぎってOK。'},
+       {t:'Take the compliment.', d:'"I love your bag!" → "Thank you!" Do NOT say "No no, it\'s cheap." 謙遜 does not translate. It makes the other person feel bad, like you rejected their gift.', jp:'「そのバッグいいね！」→「ありがとう！」だけ。「安いやつだよ」は相手を困らせます。'},
+       {t:'Teasing means you are in.', d:'If they make a light joke about you, that is affection, not an attack. Laugh, and tease them back a little. This is true at camp in almost every language.', jp:'軽いイジりは「仲良し」のサイン。笑って、少しやり返していい。これはどの国の子にも当てはまります。'},
+       {t:'Be louder than feels polite.', d:'You are coming from one of the quietest places in Japan to the loudest city on earth. At Toyooka volume, nobody will hear you — and they will read it as unfriendly, not polite. Push it up until it feels rude. That is normal here.', jp:'日本でも静かな豊岡から、世界一うるさい街へ。普段の声量では聞こえません。「うるさすぎるかな」でちょうどいい。'}
+     ]},
+    {n:'Free Talk', type:'free', h:'Free talk', s:'Tap the card. English only for the next 15 minutes.', jp:'カードをタップ。これから15分は英語だけ。',
+     cards:[
+       {t:'Plan tomorrow with me. Where, what time, what food. Decide everything.', jp:'明日の予定を一緒に立てて。どこ・何時・何を食べる。全部決めて。'},
+       {t:'Tell me one thing that happened today. I will react and ask two questions. Then you do it to me.', jp:'今日あったことを1つ話して。私が反応して質問2つ。その後、逆をやります。'},
+       {t:'I will suggest a terrible plan. Disagree with me — nicely.', jp:'私がひどい提案をします。やんわり反対してください。'},
+       {t:'Tell me about a food you don\'t like. Use "It\'s not really my thing."', jp:'苦手な食べ物の話を。"It\'s not really my thing." を使って。'},
+       {t:'I will speak Japanese on purpose. Stop me — in English.', jp:'私がわざと日本語を話します。英語で止めてください。'},
+       {t:'Ask me five questions in a row. I can only answer — I cannot ask.', jp:'私に質問を5連続で。私は答えるだけ、質問できません。'},
+       {t:'React to everything I say for two minutes. You may not use full sentences.', jp:'2分間、私の話に反応だけして。文章はNG、あいづちだけ。'},
+       {t:'You want to be closer to me. Do NOT say it — show it. Ask questions, then invite me somewhere.', jp:'私と仲良くなりたい。でも言葉で言わない。質問して、最後に誘ってください。'}
+     ],
+     helper:'Same. · For real? · No way! · That sucks. · And then what? · What was it like? · How come? · I\'m down. · kinda · honestly'},
+    {n:'Mission', type:'metro', h:'This week', lab:'Mission 02',
+     doThis:'Say "Same." or "For real?" out loud. Don\'t just nod.', jp:'黙ってうなずかない。声に出して「Same.」「For real?」と言う。',
+     foot:'Use this way · Out loud, every time', footJp:'声に出して。うなずくのはノーカウント。'}
+  ]
+},
+{
+  id:'L3', bullet:'N', color:'var(--lineN)', dark:true,
+  name:'Connecting & Closing',
+  stops:[
+    {n:'Mission', type:'mission', h:'Leave with a friend.', s:'Tell a story. Explain Japan. Get someone\'s Instagram. Say goodbye without the awkward silence.', jp:'話を語る。日本を説明する。連絡先を交換する。気まずくない別れ方をする。',
+     pts:[
+       {t:'They WILL ask you about Toyooka.', d:'At an international camp, "where are you from?" is the first question every single time — then "where IS that?" If you have no answer ready, you freeze. Today we build the answers in advance.', jp:'国際キャンプでは「どこ出身？」が必ず最初の質問。そして「え、どこそれ？」。準備がないと固まる。今日、先に作ります。'},
+       {t:'One tool explains everything: "It\'s like ___, but ___."', d:'The hot springs? "It\'s like a pajama party, but it\'s a whole town." You never need a perfect word again.', jp:'この型ひとつで何でも説明できます。完璧な単語はもう必要ありません。'},
+       {t:'The last day is when friendships get made — or lost.', d:'If you don\'t ask for their Instagram, nobody will. Two seconds of courage.', jp:'あなたが聞かなければ、誰も聞きません。勇気は2秒だけ。'}
+     ]},
+    {n:'Stories', type:'phrases', h:'Telling a story', s:'A story needs a shape: Where → What → How it felt → Ask back. Ninety seconds, that\'s all.', jp:'話の型：どこで → 何をした → どう感じた → 質問を返す。90秒でいい。',
+     items:[
+       {en:'Okay so —', jp:'えっとね、', note:'★ The universal story opener. Buys you time.', noteJp:"★万能の話し出し。考える時間も稼げます。"},
+       {en:'So today we went to Central Park.', jp:'今日セントラルパーク行ったの。', note:'Where. Start here.', noteJp:"「どこで」。まずここから始める。"},
+       {en:'We walked like two hours and I got so tired.', jp:'2時間くらい歩いてめっちゃ疲れた。', note:'"like" = だいたい. "so" = すごく.', noteJp:"like＝だいたい。so＝すごく。"},
+       {en:'...but it was so pretty. It was worth it.', jp:'でもすごくきれいだった。行ってよかった。', note:'How it felt. Don\'t skip this — this is the part they care about.', noteJp:"「どう感じたか」。ここを飛ばさない。相手が一番聞きたい部分です。"},
+       {en:'Have you been?', jp:'行ったことある？', note:'★ Ask back. Now they talk and you rest.', noteJp:"★質問を返す。相手が話してくれて、あなたは休めます。"},
+       {en:'and then / so / but like / anyway', jp:'それで／だから／でも／とにかく', note:'Spoken glue. Real speech is held together with these, not with "Firstly, Secondly."', noteJp:"話し言葉の「のり」。実際の会話は Firstly, Secondly ではなく、これでつながっています。"}
+     ]},
+    {n:'Toyooka', type:'phrases', h:'Explaining Toyooka', s:'Nobody knows your city. That is not a weakness — it is your best material. You are the only person in New York who can talk about this.', jp:'誰も豊岡を知らない。それは弱点じゃなくて、あなたの最大の武器。NYであなたにしか話せない話です。',
+     items:[
+       {en:"It's like ___, but ___.", jp:'___みたいな、でも___なやつ。', note:'★★ THE MOST USEFUL PATTERN IN THIS ENTIRE COURSE. You never need a perfect word again.', noteJp:"★★このコースで一番使える型。完璧な単語はもう必要ありません。"},
+       {en:'城崎温泉 → "There\'s a hot spring town near me. People walk around outside in robes and wooden sandals, going from bath to bath."', jp:'城崎温泉。浴衣と下駄で外湯めぐり。', note:'★ Nobody at that camp will believe this. "Outside? In a robe?" Yes. Lean into it.', noteJp:"★キャンプの誰も信じてくれない話。「外を？浴衣で？」と驚かれます。堂々と話して。"},
+       {en:'コウノトリ → "My city brought back a bird that went extinct in Japan. Our airport is named after it."', jp:'コウノトリ。絶滅した鳥を野生に戻した町。空港の名前にもなってる。', note:'★ This is a genuinely amazing story and nobody else has it. Use it.', noteJp:"★本当にすごい話で、しかも他の誰も持っていない話。使わない手はありません。"},
+       {en:'豊岡鞄 → "My city makes most of the bags in Japan. Honestly, my suitcase is probably from there."', jp:'豊岡鞄。日本の鞄の多くはここ製。', note:'★ Point at your own bag when you say it. Perfect small-talk move.', noteJp:"★言いながら自分の鞄を指さす。完璧な雑談の一手。"},
+       {en:'出石そば → "It\'s like soba, but they serve it on a bunch of tiny plates. You just keep eating."', jp:'出石の皿そば。', note:'Food always works. They will ask how many plates you can eat.', noteJp:"食べ物の話は必ずウケます。「何皿食べられるの？」と聞かれます。"},
+       {en:'"Does it snow?" → "So much snow. Way more than New York."', jp:'雪めっちゃ降るよ。NYより多い。', note:'They will not expect this from Japan.', noteJp:"日本にそんなに雪が降るとは思われていません。"},
+       {en:"It's hard to explain, but...", jp:'説明しにくいんだけど…', note:'Buys you time AND sounds fluent. Not a failure — a technique.', noteJp:"時間が稼げて、しかも流暢に聞こえる。失敗ではなく、テクニックです。"},
+       {en:'"Is it like anime?" → "Haha, kinda? We do wear uniforms."', jp:'必ず聞かれる質問。用意しておこう。', warn:true},
+       {en:'"Have you seen Mt. Fuji?" → "Honestly? Never. It\'s really far from me."', jp:'「富士山見た？」→「実は一回も。めっちゃ遠い」', note:'True, funny, and instantly human. Do not pretend.', noteJp:"正直で、面白くて、一気に人間味が出ます。見栄を張らないこと。", warn:true}
+     ]},
+    {n:'Contacts', type:'phrases', h:'Getting contacts & goodbyes', s:'Two seconds of courage. That\'s the whole skill.', jp:'勇気は2秒だけ。それだけのスキルです。',
+     items:[
+       {en:'Do you have Instagram?', jp:'インスタやってる？', note:'The standard move. Just say it.', noteJp:"定番の一言。ただ言うだけ。"},
+       {en:"What's your @?", jp:'アカウント名なに？', note:'Say it: "at". "What\'s your at?"', noteJp:"「@」は「アット」と読みます。"},
+       {en:"Can I follow you?", jp:'フォローしていい？'},
+       {en:"I'll send you the pictures!", jp:'写真送るね！', note:'A real reason to exchange contacts. Use it.', noteJp:"連絡先を交換する「理由」になります。ぜひ使って。"},
+       {en:'It was so nice meeting you.', jp:'会えてよかった！', note:'The warm goodbye. Say it and mean it.', noteJp:"温かい別れの言葉。心を込めて言う。"},
+       {en:'Have a good one!', jp:'じゃあね！元気でね！', note:'Very natural, very American. Better than "Goodbye."', noteJp:"とても自然でアメリカらしい。\"Goodbye\" よりずっといい。"},
+       {en:'Take care! / See you!', jp:'またね！'}
+     ]},
+    {n:'Lost', type:'phrases', h:'If something goes wrong', s:'Short. Serious. Learn these cold — you will not have time to think.', jp:'短く、真剣に。考える時間はありません。丸暗記して。',
+     items:[
+       {en:"I'm lost.", jp:'道に迷いました。', warn:true},
+       {en:'I got separated from my group.', jp:'グループとはぐれました。', note:'separated = はぐれた', noteJp:"separated＝はぐれた。", warn:true},
+       {en:'Can you help me?', jp:'助けてもらえますか？', warn:true},
+       {en:'Can I use your phone?', jp:'電話を貸してもらえますか？', warn:true},
+       {en:"Where's the nearest subway?", jp:'一番近い地下鉄の駅はどこですか？', warn:true},
+       {en:"I'm staying at Fordham University — the Rose Hill campus, in the Bronx.", jp:'フォーダム大学のローズヒル・キャンパス（ブロンクス）に泊まっています。', note:'Say this to a taxi driver, a police officer, anyone. Memorize it — the campus, the borough. Not just "Fordham."', noteJp:'タクシーの運転手にも、警察官にも、誰にでもこう言えばOK。キャンパス名と地区名まで丸暗記して。「Fordham」だけでは足りません。', warn:true},
+       {en:'I\'m with the Tamwood camp.', jp:'タムウッドのキャンプで来ています。', note:'The name of your program. Staff are on campus 24/7 — say this and someone will find them.', noteJp:'プログラムの名前。スタッフは24時間キャンパスにいます。これを言えば誰かが呼んでくれます。', warn:true}
+     ]},
+    {n:'Slang', type:'sayknow', h:'Say it / Know it', s:'Last set. Green now, yellow later.', jp:'最後のセット。緑は今、黄色はいつか。',
+     say:[
+       {en:'It was so fun.', jp:'めっちゃ楽しかった'},
+       {en:'Have a good one!', jp:'じゃあね'},
+       {en:'Text me!', jp:'連絡してね'},
+       {en:"It's like ___, but ___", jp:'説明の万能型'},
+       {en:'It was worth it.', jp:'行ってよかった'}
+     ],
+     know:[
+       {en:'hit me up', jp:'連絡して'},
+       {en:"let's link", jp:'また会おう'},
+       {en:"I'm dead", jp:'（笑いすぎて）死ぬ＝超おもしろい'},
+       {en:"we're good", jp:'もう大丈夫／気にしてないよ'},
+       {en:'iykyk', jp:'分かる人には分かる'}
+     ],
+     rule:'Heard it twice from a friend? Now you can use it.',
+     ruleJp:'これで3回目のルール。もう覚えましたね。'},
+    {n:'Dialogue', type:'dialogues', h:'Two dialogues', s:'The last day. Everything comes together here.', jp:'最終日。全部がここでつながります。',
+     dlgs:[
+       {t:'① Telling the story of your day', turns:[
+         {s:'a',w:'Maya',en:'Hey! How was your day?',jp:'やあ！今日どうだった？'},
+         {s:'b',w:'Rina',en:'Oh my god, so good. Okay so — we went to the natural history museum.',jp:'めっちゃよかった！えっとね、自然史博物館行ったの。'},
+         {s:'a',w:'Maya',en:'Ooh, nice. Was it crowded?',jp:'いいね。混んでた？'},
+         {s:'b',w:'Rina',en:'So crowded. We waited like 40 minutes.',jp:'めっちゃ混んでた。40分くらい待った。'},
+         {s:'a',w:'Maya',en:'Ugh, that sucks.',jp:'うわ、つらい。'},
+         {s:'b',w:'Rina',en:'Yeah, but the dinosaurs were huge. It was worth it. Have you been?',jp:'うん、でも恐竜が巨大だった。行ってよかった。行ったことある？'},
+         {s:'a',w:'Maya',en:'Yeah, when I was a kid! Did you see the whale?',jp:'子どものときにね。クジラ見た？'},
+         {s:'b',w:'Rina',en:'The whale! It was so big. I took like 50 pictures.',jp:'クジラ！めっちゃ大きかった。50枚くらい写真撮った。'}
+       ]},
+       {t:'② Explaining Toyooka, then saying goodbye', turns:[
+         {s:'a',w:'Maya',en:"So what's your town like? Is it like Tokyo?",jp:'あなたの町ってどんな感じ？東京みたいなの？'},
+         {s:'b',w:'Rina',en:"Haha, no. The opposite. It's really small — mostly rice fields.",jp:'あはは、逆。すごく小さくて、ほとんど田んぼ。'},
+         {s:'a',w:'Maya',en:'Oh, that sounds so peaceful.',jp:'なんか平和そう。'},
+         {s:'b',w:'Rina',en:"It is. But there's a hot spring town next to us. People walk around outside in robes.",jp:'そうなの。でも隣に温泉町があって、みんな浴衣で外を歩いてる。'},
+         {s:'a',w:'Maya',en:'Wait, really? Outside? In a robe?',jp:'え、まじで？外を？浴衣で？'},
+         {s:'b',w:'Rina',en:"Yeah! It's like... a pajama party, but it's a whole town.",jp:'うん！パジャマパーティーみたいな、でも町全体。'},
+         {s:'a',w:'Maya',en:"Okay, that's amazing. I'm coming to Japan.",jp:'それ最高。日本行くわ。'},
+         {s:'b',w:'Rina',en:"You should! Oh — and my city makes most of the bags in Japan. This one's from there.",jp:'来て！あ、あと私の町、日本の鞄の多くを作ってるの。これもそう。'},
+         {s:'a',w:'Maya',en:'No way. That is so cool. Hey — do you have Instagram?',jp:'うそ。かっこいい。ねえ、インスタやってる？'},
+         {s:'b',w:'Rina',en:"Yeah! What's your @? I'll send you the pictures.",jp:'うん！アカウント名は？写真送るね。'},
+         {s:'a',w:'Maya',en:'Perfect. It was so nice meeting you!',jp:'完璧。会えてよかった！'},
+         {s:'b',w:'Rina',en:'You too! Have a good one.',jp:'こちらこそ！じゃあね。'}
+       ]}
+     ]},
+    {n:'Review', type:'cloze', h:'Final check — all three lessons', s:'Mixed review. Some of these are from Lesson 1 and 2.', jp:'総復習。レッスン1・2からも出ます。',
+     qs:[
+       {sit:'Explain 城崎温泉 to a friend at camp.', txt:"It's ____ a pajama party, but it's a whole town.", o:['like','same','as'], a:0,
+        ws:['','"It\'s same a pajama party" is not grammatical. You would need "It\'s the same as..." — a different pattern.','"It\'s as a pajama party" does not work. The fixed pattern is "It\'s like ___, but ___."'],
+        wsJp:['','"It\'s same a..." は文法的に成立しません。"It\'s the same as..." なら使えますが、別の型です。','"It\'s as a..." は使えません。決まった型は "It\'s like ___, but ___."'],
+        why:'"It\'s like ___, but ___." The most useful pattern in the whole course. Use it for everything.',
+        whyJp:'"It\'s like ___, but ___." このコースで一番使える型。何にでも使えます。'},
+       {sit:'You want to start telling a story.', txt:'____ so — today we went to Brooklyn.', o:['Okay','Well then','By the way'], a:0,
+        ws:['','"Well then" sounds old-fashioned and slightly dramatic — like a villain in a movie.','"By the way" introduces a SIDE topic. You are starting the main story.'],
+        wsJp:['','"Well then" は古風で、少し芝居がかって聞こえます。映画の悪役みたいです。','"By the way" は「ところで」＝話をそらすときの表現。今から本題を始めるので合いません。'],
+        why:'"Okay so —" is how every teenager starts a story. It also buys you thinking time.',
+        whyJp:'"Okay so —" は10代が話を始めるときの定番。考える時間も稼げます。'},
+       {sit:'You want their contact.', txt:'Do you have ____?', o:['Instagram','the Instagram',"Instagram's"], a:0,
+        ws:['','No "the" with app names. "The Instagram" sounds like something your grandfather would say.','The apostrophe makes it possessive — something belonging to Instagram. Not what you mean.'],
+        wsJp:['','アプリ名に the はつけません。"the Instagram" はおじいちゃんの言い方に聞こえます。','アポストロフィは所有格。「インスタの〜」という意味になってしまいます。'],
+        why:'No "the". And "What\'s your @?" is pronounced "what\'s your AT?"',
+        whyJp:'the はつけない。"What\'s your @?" は「ワッツ・ユア・アット？」と読みます。'},
+       {sit:'Casual goodbye to someone you just met.', txt:'You say: ____', o:['Have a good one!','Goodbye, sir.','I will see you tomorrow at 9.'], a:0,
+        ws:['','"Sir" is far too formal for a teenager, and "Goodbye" on its own can sound cold or final.','You just met them — you probably will NOT see them tomorrow at 9. It sounds strangely specific.'],
+        wsJp:['','"Sir" は10代には堅すぎます。"Goodbye" だけだと冷たく、今生の別れのように響くことも。','今会ったばかりの相手です。明日9時に会う予定はないはず。妙に具体的で不自然です。'],
+        why:'"Have a good one!" is warm, casual, and extremely natural.',
+        whyJp:'"Have a good one!" は温かくてカジュアル、とても自然な別れの挨拶です。'},
+       {sit:'You cannot find your group. Emergency.', txt:'I got ____ from my group.', o:['separated','lost','away'], a:0,
+        ws:['','"I got lost" is correct on its own — but "I got lost FROM my group" is not English.','"Got away" means you escaped. It sounds like you ran away from your group on purpose.'],
+        wsJp:['','"I got lost"（道に迷った）単体なら正しいですが、"lost from my group" とは言えません。','"got away" は「逃げた」。グループからわざと逃げ出したように聞こえます。'],
+        why:'separated = はぐれた. Learn this one cold — you will not have time to think.',
+        whyJp:'separated＝はぐれた。これは丸暗記。本番に考える時間はありません。'},
+       {sit:'Someone says "I love your jacket!"', txt:'You say: ____', o:['Thank you!',"No, it's cheap.",'Really? No.'], a:0,
+        ws:['','謙遜 does not translate. It makes the other person feel bad — like you rejected their gift.','This sounds like you are arguing with them, or that you think they are lying to you.'],
+        wsJp:['','謙遜は英語では通じません。相手は「贈り物を断られた」ように感じて悲しくなります。','相手と言い争っているか、「うそでしょ」と疑っているように聞こえます。'],
+        why:'Take the compliment. Just say thank you. That is the whole move.',
+        whyJp:'ほめ言葉は素直に受け取る。"Thank you!" だけ。それで完璧です。'},
+       {sit:'REVIEW — Lesson 1. You did not hear them.', txt:"Sorry, I didn't ____ that.", o:['catch','listen','hear to'], a:0,
+        ws:['','Same as Lesson 1 — "listen" is a choice you make. "Catch" is the word for failing to hear.','Not English. The word is "catch."'],
+        wsJp:['','レッスン1と同じ。listen は「自分から聞く」こと。「聞き取れなかった」は catch。','英語として存在しません。正解は catch です。'],
+        why:'Still the most important phrase you own.',
+        whyJp:'今でもあなたの持つ一番大事なフレーズです。'},
+       {sit:'REVIEW — Lesson 2. Invite a friend to eat.', txt:'____ go get food?', o:['Wanna','Do you want to you','You want'], a:0,
+        ws:['','Repeated "you." Just say "Wanna."','Missing "to" and missing the question form. "Wanna" fixes everything.'],
+        wsJp:['','you が重複しています。"Wanna" と言えばOK。','to が抜けていて、疑問文の形でもありません。"Wanna" が全部解決します。'],
+        why:'wanna. Every time.',
+        whyJp:'wanna。毎回これ。'}
+     ]},
+    {n:'Culture', type:'culture', h:'The last things to know', s:'Listen only. Some of these will save your feelings.', jp:'聞くだけ。傷つかないための話も含みます。',
+     items:[
+       {t:'Camp friendships are fast and hot — and then everyone flies home.', d:'People will act like your best friend in ten minutes. Some will message you forever; some will never message again. That is not rejection, it is just how camp works. Do not take it personally.', jp:'10分で親友のようになります。ずっと連絡をくれる子も、二度と来ない子もいます。拒絶ではなく、キャンプとはそういうもの。'},
+       {t:'"Let\'s hang out sometime!" often means nothing.', d:'It is social politeness — like 「また今度ね」. If YOU want it to be real, name a time: "Are you free Friday?" That is completely normal and welcome here.', jp:'「また今度ね」と同じ。本気にしたいなら、あなたから日時を言えばいい。それは失礼ではありません。'},
+       {t:'Personal questions come fast.', d:'Do you have a boyfriend? How much was that? How much do your parents make? You are allowed to say "Haha, I\'m not telling!" That is a normal, friendly answer.', jp:'かなり踏み込んだ質問が飛んできます。「秘密！」と笑って答えていいんです。'},
+       {t:'Say thank you, not sorry.', d:'Late? "Thanks for waiting!" — not "I\'m so sorry." Confused? "Thanks for explaining." Over-apologizing makes people uncomfortable, because they assume you did something wrong.', jp:'遅刻→「待っててくれてありがとう」。謝りすぎると「何か悪いことした？」と思われます。'},
+       {t:'A hug may happen at goodbye.', d:'Especially on the last day. You do not have to hug. A wave and "It was so nice meeting you!" is perfectly fine — nobody will be offended.', jp:'最終日はハグされるかも。しなくて大丈夫。手を振って「会えてよかった！」で十分です。'}
+     ]},
+    {n:'Free Talk', type:'free', h:'Free talk — the real thing', s:'Longer turns now. You are ready for this.', jp:'今度は長めに話します。もう大丈夫。',
+     cards:[
+       {t:'Tell me the story of your best day in New York — two minutes. I will react and ask three questions.', jp:'NYで一番よかった日の話を2分で。私が反応して質問3つします。'},
+       {t:'Explain three Toyooka things to me — hot springs, storks, bags. Use "It\'s like ___, but ___." every time.', jp:'豊岡のこと3つ説明して（温泉・コウノトリ・鞄）。毎回 "It\'s like ___, but ___." を使って。'},
+       {t:'I have never heard of Toyooka. Make me want to go there. Ninety seconds.', jp:'私は豊岡を知りません。行きたくさせてください。90秒で。'},
+       {t:'Roleplay: it is the last day. Get my Instagram and say goodbye.', jp:'ロールプレイ：最終日。私のインスタを聞いて、別れの挨拶をして。'},
+       {t:'I will ask you rude, personal questions. Refuse them — politely, with a laugh.', jp:'失礼な質問をします。笑ってやんわり断ってください。'},
+       {t:'You are lost near Times Square. Your phone is dead. Ask me for help.', jp:'タイムズスクエアで迷子。スマホの電池切れ。助けを求めて。'},
+       {t:'Compliment me three times. I will try to refuse — you have to make me accept them.', jp:'私を3回ほめて。私は謙遜します。受け取らせてください。'},
+       {t:'Tell me what you will miss most about New York — and what you missed about Toyooka while you were here.', jp:'NYで恋しくなるものと、NY滞在中に恋しかった豊岡のものを話して。'}
+     ],
+     helper:'Okay so — · It\'s like ___, but ___ · Have you been? · It was worth it · Do you have Instagram? · It was so nice meeting you · Have a good one!'},
+    {n:'Mission', type:'metro', h:'The real mission', lab:'Mission 03',
+     doThis:'Get one person\'s Instagram. In English.', jp:'誰か1人のインスタを聞く。英語で。それだけ。',
+     foot:'Use this way · Two seconds of courage', footJp:'勇気は2秒だけ。それだけのスキルです。'}
+  ]
+}
+];
+
+let L = 0, S = 0;
+const $ = id => document.getElementById(id);
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+/* ---------- builders ---------- */
+function bMission(d){
+  return `<div class="kicker">Today</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  ${d.pts.map(p=>`<div class="card"><h4 style="font-size:19px;margin-bottom:6px;line-height:1.3">${esc(p.t)}</h4>
+    <p style="font-family:var(--talk);font-size:15.5px;color:#4C4C52;line-height:1.6">${esc(p.d)}
+    <span class="jp" style="display:block;color:#707076;font-size:14px;margin-top:6px;line-height:1.65">${esc(p.jp)}</span></p></div>`).join('')}`;
+}
+function bPhrases(d){
+  return `<div class="kicker">Phrase Bank</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  ${d.items.map(i=>`<div class="phrase${i.warn?' warn':''}">
+    <div class="ph-en">${esc(i.en)}</div>
+    ${i.jp?`<div class="ph-jp jp">${esc(i.jp)}</div>`:''}
+    ${i.note?`<div class="ph-note">${esc(i.note)}${i.noteJp?`<span class="jp">${esc(i.noteJp)}</span>`:''}</div>`:''}</div>`).join('')}`;
+}
+function bSayKnow(d){
+  const c = a => a.map(x=>`<span class="chip">${esc(x.en)}<small class="jp">${esc(x.jp)}</small></span>`).join('');
+  return `<div class="kicker">Slang, in two tiers</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  <div class="tier say"><div class="tier-head"><i style="background:var(--go)"></i><b>Say it</b><em>今日から使ってOK</em></div><div class="chips">${c(d.say)}</div></div>
+  <div class="tier know"><div class="tier-head"><i style="background:var(--lineN)"></i><b>Know it</b><em>意味が分かればOK。まだ言わない</em></div><div class="chips">${c(d.know)}</div></div>
+  <div class="rule">${esc(d.rule)}<span class="jp">${esc(d.ruleJp)}</span></div>`;
+}
+function bDialogues(d){
+  return `<div class="kicker">Practice</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  ${d.dlgs.map((g,gi)=>`
+    <h4 style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin:24px 0 10px">${esc(g.t)}</h4>
+    <button class="btn-ghost" data-hide="${gi}" aria-pressed="false">Hide Rina's lines</button>
+    <div class="dlg" id="dlg${gi}">
+      ${g.turns.map(t=>`<div class="turn ${t.s}">
+        ${t.s==='b'?'':`<span class="who">${esc(t.w)}</span>`}
+        <span class="bub${d.pale&&t.s==='b'?' pale':''}">${esc(t.en)}<span class="jp">${esc(t.jp)}</span></span>
+        ${t.s==='b'?`<span class="who">${esc(t.w)}</span>`:''}
+      </div>`).join('')}
+    </div>`).join('')}`;
+}
+function bCloze(d,si){
+  return `<div class="kicker">Review</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  ${d.qs.map((q,qi)=>`<div class="q" id="q${si}_${qi}" data-ws="${encodeURIComponent(JSON.stringify(q.ws||[]))}" data-wsjp="${encodeURIComponent(JSON.stringify(q.wsJp||[]))}">
+    <div class="q-sit">${esc(q.sit)}</div>
+    <div class="q-txt">${esc(q.txt).replace('____','<u></u>')}</div>
+    <div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-q="${si}_${qi}" data-i="${oi}" data-a="${q.a}">${esc(o)}</button>`).join('')}</div>
+    <div class="q-no" id="no${si}_${qi}"></div>
+    <div class="q-why">${esc(q.why)}<span class="jp">${esc(q.whyJp||'')}</span></div>
+  </div>`).join('')}
+  <div class="score"><span>Score</span><span><b id="sc${si}">0</b> / ${d.qs.length}</span></div>`;
+}
+function bCulture(d){
+  return `<div class="kicker">Culture — listen only</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  ${d.items.map((i,n)=>`<div class="cu"><div class="cu-n">0${n+1}</div><div>
+    <h4>${esc(i.t)}</h4><p>${esc(i.d)}<span class="jp">${esc(i.jp)}</span></p></div></div>`).join('')}`;
+}
+function bFree(d,si){
+  return `<div class="kicker">Free talk</div><h2>${esc(d.h)}</h2>
+  <p class="sub">${esc(d.s)}<span class="jp">${esc(d.jp)}</span></p>
+  <div class="draw" id="draw${si}">
+    <div class="lab">Scenario card</div>
+    <div class="task" id="task${si}">Tap below to draw a card.<span class="jp">下のボタンでカードを引いてください。</span></div>
+  </div>
+  <button class="btn-solid" data-draw="${si}">Draw a card →</button>
+  <div class="helper"><b>Keep these in front of you</b>
+    <div style="font-family:var(--talk);font-size:16px;color:#3A3A40;line-height:1.75">${esc(d.helper)}</div></div>`;
+}
+function bMetro(d){
+  return `<div class="kicker">Take it with you</div><h2>${esc(d.h)}</h2>
+  <p class="sub">One thing. Not ten. Do this and the trip changes.<span class="jp">1つだけ。10個じゃない。これをやれば旅行が変わります。</span></p>
+  <div class="metro">
+    <div class="mc-in">
+      <div class="mc-lab">${esc(d.lab)}</div>
+      <div class="mc-mark">Mission<span>Card</span></div>
+      <div class="mc-do">${esc(d.doThis)}</div>
+      <div class="mc-jp jp">${esc(d.jp)}</div>
+    </div>
+    <div class="mc-hole"></div>
+    <div class="mc-stripe"></div>
+    <div class="mc-swipe">
+      <span class="arw">◀◀ ←</span>
+      <b>${esc(d.foot)}<em>${esc(d.footJp||'')}</em></b>
+    </div>
+  </div>`;
+}
+
+/* ---------- render ---------- */
+function render(){
+  const les = D[L], st = les.stops[S];
+  document.documentElement.style.setProperty('--accent', les.color);
+  const bl = $('bullet');
+  bl.textContent = les.bullet;
+  bl.className = 'bullet' + (les.dark?' dark':'');
+  $('eyebrow').textContent = `Lesson ${L+1} · ${les.name}`;
+  $('stopname').textContent = st.n;
+
+  $('lines').innerHTML = D.map((l,i)=>`<button class="line-tab" role="tab" aria-selected="${i===L}" data-l="${i}">
+    <span class="dot" style="background:${l.color};${l.dark?'color:#0B0B0C':''}">${l.bullet}</span>${l.name}</button>`).join('');
+  $('route').innerHTML = les.stops.map((s,i)=>`<button class="stopdot ${i<S?'done':''} ${i===S?'here':''}" data-s="${i}">
+    <i></i><span>${s.n}</span></button>`).join('');
+
+  let html='';
+  if(st.type==='mission') html=bMission(st);
+  else if(st.type==='phrases') html=bPhrases(st);
+  else if(st.type==='sayknow') html=bSayKnow(st);
+  else if(st.type==='dialogues'){ st.pale = les.dark; html=bDialogues(st); }
+  else if(st.type==='cloze') html=bCloze(st,L+'_'+S);
+  else if(st.type==='culture') html=bCulture(st);
+  else if(st.type==='free') html=bFree(st,L+'_'+S);
+  else if(st.type==='metro') html=bMetro(st);
+  $('stage').innerHTML = `<section class="slide on">${html}</section>`;
+
+  $('cnt').textContent = `${S+1} / ${les.stops.length}`;
+  $('prev').disabled = (L===0 && S===0);
+  const nx = $('next');
+  nx.disabled = (L===D.length-1 && S===les.stops.length-1);
+  nx.className = 'next' + (les.dark?' dark-txt':'');
+  document.querySelectorAll('.btn-solid').forEach(b=>b.className='btn-solid'+(les.dark?' dark-txt':''));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e=>{
+  const t = e.target.closest('button');
+  if(!t) return;
+
+  if(t.dataset.l !== undefined){ L=+t.dataset.l; S=0; render(); return; }
+  if(t.dataset.s !== undefined){ S=+t.dataset.s; render(); return; }
+
+  if(t.id==='next'){ const l=D[L];
+    if(S<l.stops.length-1) S++; else if(L<D.length-1){ L++; S=0; }
+    render(); return; }
+  if(t.id==='prev'){
+    if(S>0) S--; else if(L>0){ L--; S=D[L].stops.length-1; }
+    render(); return; }
+
+  if(t.id==='jpBtn'){
+    const on = t.getAttribute('aria-pressed')==='true';
+    t.setAttribute('aria-pressed', String(!on));
+    t.textContent = on ? '日本語 OFF' : '日本語 ON';
+    document.body.classList.toggle('jp-off', on);
+    return; }
+
+  if(t.dataset.hide !== undefined){
+    const dlg = $('dlg'+t.dataset.hide);
+    const on = t.getAttribute('aria-pressed')==='true';
+    t.setAttribute('aria-pressed', String(!on));
+    dlg.classList.toggle('hide-b', !on);
+    t.textContent = on ? "Hide Rina's lines" : "Show Rina's lines";
+    return; }
+
+  if(t.classList.contains('opt')){
+    const q = $('q'+t.dataset.q);
+    if(q.classList.contains('solved')) return;
+    const right = t.dataset.i === t.dataset.a;
+    t.classList.add(right?'right':'wrong');
+    const no = $('no'+t.dataset.q);
+    if(right){
+      q.classList.add('solved');
+      q.querySelectorAll('.opt').forEach(o=>o.disabled=true);
+      if(no) no.classList.remove('on');
+      const sc = $('sc'+t.dataset.q.split('_').slice(0,2).join('_'));
+      if(sc) sc.textContent = String(+sc.textContent + 1);
+      const u = q.querySelector('u');
+      if(u){ u.textContent = t.textContent; u.style.borderBottomColor='var(--go)'; u.style.padding='0 4px'; }
+    } else {
+      t.disabled = true;
+      let ws=[], wj=[];
+      try{ ws = JSON.parse(decodeURIComponent(q.dataset.ws||'[]')); }catch(e){}
+      try{ wj = JSON.parse(decodeURIComponent(q.dataset.wsjp||'[]')); }catch(e){}
+      const msg = ws[+t.dataset.i], msgJp = wj[+t.dataset.i];
+      if(no && msg){
+        no.innerHTML = '<b>Why not "'+esc(t.textContent)+'"</b>' + esc(msg)
+          + (msgJp ? '<span class="jp">'+esc(msgJp)+'</span>' : '');
+        no.classList.add('on');
+      }
+    }
+    return; }
+
+  if(t.dataset.draw !== undefined){
+    const si = t.dataset.draw;
+    const st = D[L].stops[S];
+    if(!st._bag || !st._bag.length) st._bag = st.cards.map((_,i)=>i).sort(()=>Math.random()-.5);
+    const c = st.cards[st._bag.pop()];
+    $('task'+si).innerHTML = esc(c.t)+`<span class="jp">${esc(c.jp)}</span>`;
+    t.textContent = st._bag.length ? 'Draw another →' : 'Reshuffle →';
+    return; }
+});
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName==='BUTTON' && e.key===' ') return;
+  if(e.key==='ArrowRight') $('next').click();
+  if(e.key==='ArrowLeft') $('prev').click();
+});
+render();
+</script>
+</body>
+</html>

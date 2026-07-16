@@ -125,6 +125,16 @@
   }
   .say span{border-color:var(--go);color:#0A6B33}
   .know span{border-color:#D8B400;background:#FFFBEE;color:var(--ink)}
+  .chips span{display:inline-flex;align-items:center;gap:6px}
+  .chipspk{
+    flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:none;cursor:pointer;
+    background:var(--ink);color:#fff;font-size:9px;line-height:1;display:grid;place-items:center;padding:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chipspk:active{transform:scale(.88)}
+  .chipspk.playing{background:var(--go)}
+  .chipspk.missing{display:none}
+  .say .chipspk{background:var(--go)} .know .chipspk{background:#B8960A}
   .note{
     background:var(--ink);color:#fff;border-radius:3px;padding:10px 11px;
     font-size:12.5px;font-weight:700;line-height:1.3;
@@ -228,9 +238,9 @@
       <li class="star"><span class="en"><button class="spk" data-audio="room-01" aria-label="Play">▶</button><span class="entxt">Hey! Are you my roommate? I'm Rina.</span></span><span class="jp">先に言う。先に話した人が気まずくならない</span></li>
       <li><span class="en"><button class="spk" data-audio="room-02" aria-label="Play">▶</button><span class="entxt">Which bed do you want?</span></span><span class="jp">どっちのベッドがいい？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="room-03" aria-label="Play">▶</button><span class="entxt">Do you mind if I ___?</span></span><span class="jp">〜してもいい？（窓・電気・充電、全部これ）</span></li>
-      <li><span class="en">Is it okay if I turn off the light?</span><span class="jp">電気消してもいい？</span></li>
+      <li><span class="en"><button class="spk" data-audio="room-08" aria-label="Play">▶</button><span class="entxt">Is it okay if I turn off the light?</span></span><span class="jp">電気消してもいい？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="room-05" aria-label="Play">▶</button><span class="entxt">Are you going to breakfast?</span></span><span class="jp">朝ごはん行く？（一人で食べないために）</span></li>
-      <li><span class="en">Sorry, am I being loud?</span><span class="jp">ごめん、うるさい？</span></li>
+      <li><span class="en"><button class="spk" data-audio="room-09" aria-label="Play">▶</button><span class="entxt">Sorry, am I being loud?</span></span><span class="jp">ごめん、うるさい？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="room-07" aria-label="Play">▶</button><span class="entxt">Good night! See you tomorrow.</span></span><span class="jp">毎晩言う。2秒で一週間が変わる</span></li>
     </ul>
   </section>
@@ -239,25 +249,25 @@
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>Dorm &amp; dining hall</b><em>寮・食堂</em></div>
     <ul>
       <li class="star"><span class="en"><button class="spk" data-audio="campus-01" aria-label="Play">▶</button><span class="entxt">Can I sit here?</span></span><span class="jp">ここ座ってもいい？　←今週いちばん勇気のいる4語</span></li>
-      <li><span class="en">Is anyone sitting here?</span><span class="jp">ここ空いてる？</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-08" aria-label="Play">▶</button><span class="entxt">Is anyone sitting here?</span></span><span class="jp">ここ空いてる？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="campus-03" aria-label="Play">▶</button><span class="entxt">What is that? Is it good?</span></span><span class="jp">それ何？おいしい？（毎食使える会話のきっかけ）</span></li>
-      <li><span class="en">counselor</span><span class="jp">カウンセラー（引率スタッフ。teacherではない）</span></li>
-      <li><span class="en">the dining hall / the lounge</span><span class="jp">食堂／ラウンジ</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-09" aria-label="Play">▶</button><span class="entxt">counselor</span></span><span class="jp">カウンセラー（引率スタッフ。teacherではない）</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-10" aria-label="Play">▶</button><span class="entxt">the dining hall / the lounge</span></span><span class="jp">食堂／ラウンジ</span></li>
       <li><span class="en"><button class="spk" data-audio="campus-07" aria-label="Play">▶</button><span class="entxt">What time do we meet?</span></span><span class="jp">何時集合？</span></li>
-      <li><span class="en">Where are we going today?</span><span class="jp">今日どこ行くの？</span></li>
-      <li><span class="en">How do you say hello in ___?</span><span class="jp">___語で「こんにちは」は？（世界中の子に効く）</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-11" aria-label="Play">▶</button><span class="entxt">Where are we going today?</span></span><span class="jp">今日どこ行くの？</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-12" aria-label="Play">▶</button><span class="entxt">How do you say hello in ___?</span></span><span class="jp">___語で「こんにちは」は？（世界中の子に効く）</span></li>
     </ul>
   </section>
 
   <section class="sec l1" id="shops">
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>Shops &amp; hello</b><em>サバイバル</em></div>
     <ul>
-      <li><span class="en">Can I get a ___?</span><span class="jp">___をください</span></li>
+      <li><span class="en"><button class="spk" data-audio="shops-05" aria-label="Play">▶</button><span class="entxt">Can I get a ___?</span></span><span class="jp">___をください</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="shops-02" aria-label="Play">▶</button><span class="entxt">I'm good, thanks.</span></span><span class="jp">大丈夫です（＝いりません）</span></li>
-      <li><span class="en">For here. / To go.</span><span class="jp">店内で／持ち帰りで</span></li>
+      <li><span class="en"><button class="spk" data-audio="shops-06" aria-label="Play">▶</button><span class="entxt">For here. / To go.</span></span><span class="jp">店内で／持ち帰りで</span></li>
       <li><span class="en"><button class="spk" data-audio="shops-04" aria-label="Play">▶</button><span class="entxt">"You all set?" → "Yeah, I'm good."</span></span><span class="jp">以上で大丈夫？→はい</span></li>
-      <li><span class="en">"What's up?" → "Not much, you?"</span><span class="jp">挨拶。質問じゃない</span></li>
-      <li class="star"><span class="en">What about you?</span><span class="jp">そっちは？（必ず返す）</span></li>
+      <li><span class="en"><button class="spk" data-audio="shops-07" aria-label="Play">▶</button><span class="entxt">"What's up?" → "Not much, you?"</span></span><span class="jp">挨拶。質問じゃない</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="shops-08" aria-label="Play">▶</button><span class="entxt">What about you?</span></span><span class="jp">そっちは？（必ず返す）</span></li>
     </ul>
   </section>
 
@@ -266,24 +276,24 @@
     <ul>
       <li class="star"><span class="en"><button class="spk" data-audio="friends-01" aria-label="Play">▶</button><span class="entxt">Same.</span></span><span class="jp">わかる／私も</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="friends-02" aria-label="Play">▶</button><span class="entxt">For real? / No way!</span></span><span class="jp">まじで？／うそー</span></li>
-      <li><span class="en">Oh really? / Right?!</span><span class="jp">そうなんだ／だよね</span></li>
-      <li><span class="en">That's so cool. / Nice.</span><span class="jp">いいね</span></li>
-      <li><span class="en">Aww, that sucks.</span><span class="jp">それはつらいね</span></li>
+      <li><span class="en"><button class="spk" data-audio="friends-08" aria-label="Play">▶</button><span class="entxt">Oh really? / Right?!</span></span><span class="jp">そうなんだ／だよね</span></li>
+      <li><span class="en"><button class="spk" data-audio="friends-09" aria-label="Play">▶</button><span class="entxt">That's so cool. / Nice.</span></span><span class="jp">いいね</span></li>
+      <li><span class="en"><button class="spk" data-audio="friends-10" aria-label="Play">▶</button><span class="entxt">Aww, that sucks.</span></span><span class="jp">それはつらいね</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="friends-06" aria-label="Play">▶</button><span class="entxt">And then what?</span></span><span class="jp">それでどうなったの？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="friends-07" aria-label="Play">▶</button><span class="entxt">What was it like?</span></span><span class="jp">どんな感じだった？（万能質問）</span></li>
-      <li><span class="en">How come?</span><span class="jp">なんで？</span></li>
+      <li><span class="en"><button class="spk" data-audio="friends-11" aria-label="Play">▶</button><span class="entxt">How come?</span></span><span class="jp">なんで？</span></li>
     </ul>
   </section>
 
   <section class="sec la" id="plans">
     <div class="sec-hd"><i style="background:var(--lineA)">A</i><b>Plans &amp; opinions</b><em>予定・意見</em></div>
     <ul>
-      <li><span class="en">Wanna go get food?</span><span class="jp">ごはん行かない？</span></li>
+      <li><span class="en"><button class="spk" data-audio="plans-08" aria-label="Play">▶</button><span class="entxt">Wanna go get food?</span></span><span class="jp">ごはん行かない？</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="plans-02" aria-label="Play">▶</button><span class="entxt">I'm down.</span></span><span class="jp">いいね、行く！</span></li>
-      <li><span class="en">I'll meet you in the lounge.</span><span class="jp">ラウンジで待ち合わせ（各フロアにあります）</span></li>
-      <li><span class="en">It's kinda boring, honestly.</span><span class="jp">正直ちょっと退屈</span></li>
-      <li class="star"><span class="en">It's not really my thing.</span><span class="jp">やんわり断る「NO」</span></li>
-      <li><span class="en">Yeah, but...</span><span class="jp">うん、でも…（反対する時）</span></li>
+      <li><span class="en"><button class="spk" data-audio="plans-09" aria-label="Play">▶</button><span class="entxt">I'll meet you in the lounge.</span></span><span class="jp">ラウンジで待ち合わせ（各フロアにあります）</span></li>
+      <li><span class="en"><button class="spk" data-audio="plans-10" aria-label="Play">▶</button><span class="entxt">It's kinda boring, honestly.</span></span><span class="jp">正直ちょっと退屈</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="plans-11" aria-label="Play">▶</button><span class="entxt">It's not really my thing.</span></span><span class="jp">やんわり断る「NO」</span></li>
+      <li><span class="en"><button class="spk" data-audio="plans-12" aria-label="Play">▶</button><span class="entxt">Yeah, but...</span></span><span class="jp">うん、でも…（反対する時）</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="plans-07" aria-label="Play">▶</button><span class="entxt">Wait — English!</span></span><span class="jp">ちょっと、英語！</span></li>
     </ul>
   </section>
@@ -293,11 +303,11 @@
     <ul>
       <li class="bad"><span class="en">✗ "Let's be friends!"</span><span class="jp">英語では子どもっぽい／フラれる時の言葉</span></li>
       <li class="bad"><span class="en">✗ "I want to get to know you better." (1-on-1)</span><span class="jp">1対1だと告白に聞こえる</span></li>
-      <li class="star"><span class="en">I wanna get to know you guys better.</span><span class="jp">みんなと仲良くなりたい（複数形が安全）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="closer-09" aria-label="Play">▶</button><span class="entxt">I wanna get to know you guys better.</span></span><span class="jp">みんなと仲良くなりたい（複数形が安全）</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="closer-04" aria-label="Play">▶</button><span class="entxt">Okay, I have so many questions.</span></span><span class="jp">質問めっちゃある！（相手に話させる）</span></li>
-      <li><span class="en">Tell me more about that!</span><span class="jp">もっと聞かせて！</span></li>
-      <li><span class="en">You're so easy to talk to.</span><span class="jp">話しやすいね</span></li>
-      <li><span class="en">We should hang out more!</span><span class="jp">もっと一緒にいたいな</span></li>
+      <li><span class="en"><button class="spk" data-audio="closer-10" aria-label="Play">▶</button><span class="entxt">Tell me more about that!</span></span><span class="jp">もっと聞かせて！</span></li>
+      <li><span class="en"><button class="spk" data-audio="closer-11" aria-label="Play">▶</button><span class="entxt">You're so easy to talk to.</span></span><span class="jp">話しやすいね</span></li>
+      <li><span class="en"><button class="spk" data-audio="closer-12" aria-label="Play">▶</button><span class="entxt">We should hang out more!</span></span><span class="jp">もっと一緒にいたいな</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="closer-08" aria-label="Play">▶</button><span class="entxt">Are you free tomorrow?</span></span><span class="jp">明日ひま？　←これが本当の「親しみたい」</span></li>
     </ul>
   </section>
@@ -308,52 +318,52 @@
       <div class="tier say">
         <div class="tier-hd"><i style="background:var(--go)"></i><b>Say it</b><em>今日から使ってOK</em></div>
         <div class="chips">
-          <span>Same.<small>わかる／私も</small></span>
-          <span>For real?<small>まじで？</small></span>
-          <span>No way!<small>うそー</small></span>
-          <span>Seriously?<small>まじで？</small></span>
-          <span>Right?!<small>だよね！</small></span>
-          <span>Nice.<small>いいね</small></span>
-          <span>That's so cool.<small>すごい！</small></span>
-          <span>That's crazy.<small>やばい（良い・悪い両方）</small></span>
-          <span>That sucks.<small>それはつらい</small></span>
-          <span>I'm down.<small>行く！いいね</small></span>
-          <span>I'm good.<small>大丈夫＝いらない</small></span>
-          <span>My bad.<small>ごめん（軽く）</small></span>
-          <span>One sec.<small>ちょっと待って</small></span>
-          <span>wanna<small>= want to</small></span>
-          <span>gonna<small>= going to</small></span>
-          <span>kinda<small>ちょっと（やわらげる）</small></span>
-          <span>like<small>だいたい／なんか</small></span>
-          <span>honestly<small>正直</small></span>
-          <span>just<small>ただ〜（やわらげる）</small></span>
-          <span>so<small>めっちゃ</small></span>
-          <span>What's up?<small>やあ（質問じゃない）</small></span>
-          <span>Have a good one!<small>じゃあね</small></span>
-          <span>Text me!<small>連絡してね</small></span>
-          <span>It was worth it.<small>行ってよかった</small></span>
+          <span><button class="chipspk" data-audio="slangS-01" aria-label="Play">▶</button>Same.<small>わかる／私も</small></span>
+          <span><button class="chipspk" data-audio="slangS-02" aria-label="Play">▶</button>For real?<small>まじで？</small></span>
+          <span><button class="chipspk" data-audio="slangS-03" aria-label="Play">▶</button>No way!<small>うそー</small></span>
+          <span><button class="chipspk" data-audio="slangS-04" aria-label="Play">▶</button>Seriously?<small>まじで？</small></span>
+          <span><button class="chipspk" data-audio="slangS-05" aria-label="Play">▶</button>Right?!<small>だよね！</small></span>
+          <span><button class="chipspk" data-audio="slangS-06" aria-label="Play">▶</button>Nice.<small>いいね</small></span>
+          <span><button class="chipspk" data-audio="slangS-07" aria-label="Play">▶</button>That's so cool.<small>すごい！</small></span>
+          <span><button class="chipspk" data-audio="slangS-08" aria-label="Play">▶</button>That's crazy.<small>やばい（良い・悪い両方）</small></span>
+          <span><button class="chipspk" data-audio="slangS-09" aria-label="Play">▶</button>That sucks.<small>それはつらい</small></span>
+          <span><button class="chipspk" data-audio="slangS-10" aria-label="Play">▶</button>I'm down.<small>行く！いいね</small></span>
+          <span><button class="chipspk" data-audio="slangS-11" aria-label="Play">▶</button>I'm good.<small>大丈夫＝いらない</small></span>
+          <span><button class="chipspk" data-audio="slangS-12" aria-label="Play">▶</button>My bad.<small>ごめん（軽く）</small></span>
+          <span><button class="chipspk" data-audio="slangS-13" aria-label="Play">▶</button>One sec.<small>ちょっと待って</small></span>
+          <span><button class="chipspk" data-audio="slangS-14" aria-label="Play">▶</button>wanna<small>= want to</small></span>
+          <span><button class="chipspk" data-audio="slangS-15" aria-label="Play">▶</button>gonna<small>= going to</small></span>
+          <span><button class="chipspk" data-audio="slangS-16" aria-label="Play">▶</button>kinda<small>ちょっと（やわらげる）</small></span>
+          <span><button class="chipspk" data-audio="slangS-17" aria-label="Play">▶</button>like<small>だいたい／なんか</small></span>
+          <span><button class="chipspk" data-audio="slangS-18" aria-label="Play">▶</button>honestly<small>正直</small></span>
+          <span><button class="chipspk" data-audio="slangS-19" aria-label="Play">▶</button>just<small>ただ〜（やわらげる）</small></span>
+          <span><button class="chipspk" data-audio="slangS-20" aria-label="Play">▶</button>so<small>めっちゃ</small></span>
+          <span><button class="chipspk" data-audio="slangS-21" aria-label="Play">▶</button>What's up?<small>やあ（質問じゃない）</small></span>
+          <span><button class="chipspk" data-audio="slangS-22" aria-label="Play">▶</button>Have a good one!<small>じゃあね</small></span>
+          <span><button class="chipspk" data-audio="slangS-23" aria-label="Play">▶</button>Text me!<small>連絡してね</small></span>
+          <span><button class="chipspk" data-audio="slangS-24" aria-label="Play">▶</button>It was worth it.<small>行ってよかった</small></span>
         </div>
       </div>
       <div class="tier know">
         <div class="tier-hd"><i style="background:var(--lineN)"></i><b>Know it</b><em>分かればOK。まだ言わない</em></div>
         <div class="chips">
-          <span>lowkey<small>ちょっと／密かに</small></span>
-          <span>highkey<small>めっちゃ（隠さず）</small></span>
-          <span>no cap<small>まじで、うそじゃない</small></span>
-          <span>bet<small>了解！／いいね</small></span>
-          <span>that's fire<small>最高</small></span>
-          <span>it's giving ___<small>〜の雰囲気ある</small></span>
-          <span>she ate<small>完璧だった</small></span>
-          <span>delulu<small>妄想がすごい（冗談）</small></span>
-          <span>hit me up<small>連絡して</small></span>
-          <span>let's link<small>また会おう</small></span>
-          <span>I'm dead<small>笑いすぎ＝超おもしろい</small></span>
-          <span>we're good<small>もう気にしてない</small></span>
-          <span>iykyk<small>分かる人には分かる</small></span>
-          <span>no worries<small>気にしないで</small></span>
-          <span>You all set?<small>以上で大丈夫？</small></span>
-          <span>You good?<small>大丈夫？→"Yeah, I'm good."</small></span>
-          <span>What's good?<small>= What's up?</small></span>
+          <span><button class="chipspk" data-audio="slangK-01" aria-label="Play">▶</button>lowkey<small>ちょっと／密かに</small></span>
+          <span><button class="chipspk" data-audio="slangK-02" aria-label="Play">▶</button>highkey<small>めっちゃ（隠さず）</small></span>
+          <span><button class="chipspk" data-audio="slangK-03" aria-label="Play">▶</button>no cap<small>まじで、うそじゃない</small></span>
+          <span><button class="chipspk" data-audio="slangK-04" aria-label="Play">▶</button>bet<small>了解！／いいね</small></span>
+          <span><button class="chipspk" data-audio="slangK-05" aria-label="Play">▶</button>that's fire<small>最高</small></span>
+          <span><button class="chipspk" data-audio="slangK-06" aria-label="Play">▶</button>it's giving ___<small>〜の雰囲気ある</small></span>
+          <span><button class="chipspk" data-audio="slangK-07" aria-label="Play">▶</button>she ate<small>完璧だった</small></span>
+          <span><button class="chipspk" data-audio="slangK-08" aria-label="Play">▶</button>delulu<small>妄想がすごい（冗談）</small></span>
+          <span><button class="chipspk" data-audio="slangK-09" aria-label="Play">▶</button>hit me up<small>連絡して</small></span>
+          <span><button class="chipspk" data-audio="slangK-10" aria-label="Play">▶</button>let's link<small>また会おう</small></span>
+          <span><button class="chipspk" data-audio="slangK-11" aria-label="Play">▶</button>I'm dead<small>笑いすぎ＝超おもしろい</small></span>
+          <span><button class="chipspk" data-audio="slangK-12" aria-label="Play">▶</button>we're good<small>もう気にしてない</small></span>
+          <span><button class="chipspk" data-audio="slangK-13" aria-label="Play">▶</button>iykyk<small>分かる人には分かる</small></span>
+          <span><button class="chipspk" data-audio="slangK-14" aria-label="Play">▶</button>no worries<small>気にしないで</small></span>
+          <span><button class="chipspk" data-audio="slangK-15" aria-label="Play">▶</button>You all set?<small>以上で大丈夫？</small></span>
+          <span><button class="chipspk" data-audio="slangK-16" aria-label="Play">▶</button>You good?<small>大丈夫？→"Yeah, I'm good."</small></span>
+          <span><button class="chipspk" data-audio="slangK-17" aria-label="Play">▶</button>What's good?<small>= What's up?</small></span>
         </div>
       </div>
       <div class="note">Heard it twice from a friend? Now you can use it.
@@ -366,38 +376,38 @@
     <ul>
       <li class="star"><span class="en"><button class="spk" data-audio="toy-02" aria-label="Play">▶</button><span class="entxt">Japan — a city called Toyooka.</span></span><span class="jp">豊岡ってところ</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="toy-03" aria-label="Play">▶</button><span class="entxt">It's in the countryside, near Kyoto.</span></span><span class="jp">「どこそれ？」の答え</span></li>
-      <li><span class="en">It's pretty far from everything.</span><span class="jp">けっこう田舎だよ（笑って言う）</span></li>
-      <li><span class="en">There's a hot spring town next to us. People walk outside in robes.</span><span class="jp">城崎温泉</span></li>
-      <li class="star"><span class="en">It's like a pajama party, but it's a whole town.</span><span class="jp">城崎のジョーク。必ずウケる</span></li>
-      <li><span class="en">My city brought back a bird that went extinct. Our airport is named after it.</span><span class="jp">コウノトリ</span></li>
-      <li><span class="en">My city makes most of the bags in Japan. This one's from there.</span><span class="jp">豊岡鞄。自分の鞄を指さす</span></li>
-      <li><span class="en">"Have you seen Mt. Fuji?" → "Honestly? Never."</span><span class="jp">正直に言っていい</span></li>
+      <li><span class="en"><button class="spk" data-audio="toy-04" aria-label="Play">▶</button><span class="entxt">It's pretty far from everything.</span></span><span class="jp">けっこう田舎だよ（笑って言う）</span></li>
+      <li><span class="en"><button class="spk" data-audio="toy-05" aria-label="Play">▶</button><span class="entxt">There's a hot spring town next to us. People walk outside in robes.</span></span><span class="jp">城崎温泉</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="toy-06" aria-label="Play">▶</button><span class="entxt">It's like a pajama party, but it's a whole town.</span></span><span class="jp">城崎のジョーク。必ずウケる</span></li>
+      <li><span class="en"><button class="spk" data-audio="toy-07" aria-label="Play">▶</button><span class="entxt">My city brought back a bird that went extinct. Our airport is named after it.</span></span><span class="jp">コウノトリ</span></li>
+      <li><span class="en"><button class="spk" data-audio="toy-08" aria-label="Play">▶</button><span class="entxt">My city makes most of the bags in Japan. This one's from there.</span></span><span class="jp">豊岡鞄。自分の鞄を指さす</span></li>
+      <li><span class="en"><button class="spk" data-audio="toy-09" aria-label="Play">▶</button><span class="entxt">"Have you seen Mt. Fuji?" → "Honestly? Never."</span></span><span class="jp">正直に言っていい</span></li>
     </ul>
   </section>
 
   <section class="sec ln" id="bye">
     <div class="sec-hd"><i style="background:var(--lineN);color:#0B0B0C">N</i><b>Stories &amp; goodbye</b><em>最終日</em></div>
     <ul>
-      <li><span class="en">Okay so —</span><span class="jp">えっとね、（話し始め）</span></li>
-      <li class="star"><span class="en">It's like ___, but ___.</span><span class="jp">最強の説明ツール</span></li>
-      <li><span class="en">It's hard to explain, but...</span><span class="jp">説明しにくいけど…</span></li>
-      <li><span class="en">Have you been?</span><span class="jp">行ったことある？</span></li>
-      <li><span class="en">It was worth it.</span><span class="jp">行ってよかった</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-09" aria-label="Play">▶</button><span class="entxt">Okay so —</span></span><span class="jp">えっとね、（話し始め）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="bye-10" aria-label="Play">▶</button><span class="entxt">It's like ___, but ___.</span></span><span class="jp">最強の説明ツール</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-11" aria-label="Play">▶</button><span class="entxt">It's hard to explain, but...</span></span><span class="jp">説明しにくいけど…</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-12" aria-label="Play">▶</button><span class="entxt">Have you been?</span></span><span class="jp">行ったことある？</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-13" aria-label="Play">▶</button><span class="entxt">It was worth it.</span></span><span class="jp">行ってよかった</span></li>
       <li class="star"><span class="en"><button class="spk" data-audio="bye-06" aria-label="Play">▶</button><span class="entxt">Do you have Instagram?</span></span><span class="jp">インスタやってる？</span></li>
-      <li><span class="en">What's your @?</span><span class="jp">アカウント名は？</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-14" aria-label="Play">▶</button><span class="entxt">What's your @?</span></span><span class="jp">アカウント名は？</span></li>
       <li><span class="en"><button class="spk" data-audio="bye-08" aria-label="Play">▶</button><span class="entxt">It was so nice meeting you!</span></span><span class="jp">会えてよかった！</span></li>
-      <li><span class="en">Have a good one!</span><span class="jp">じゃあね！</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-15" aria-label="Play">▶</button><span class="entxt">Have a good one!</span></span><span class="jp">じゃあね！</span></li>
     </ul>
   </section>
 
   <section class="sos" id="sos">
     <b>⚠ If something goes wrong</b>
     <ul>
-      <li><span class="en">I got separated from my group.</span><span class="jp">グループとはぐれました</span></li>
-      <li><span class="en">Can you help me?</span><span class="jp">助けてもらえますか？</span></li>
-      <li><span class="en">Can I use your phone?</span><span class="jp">電話を貸してください</span></li>
-      <li><span class="en">Where's the nearest subway?</span><span class="jp">一番近い地下鉄は？</span></li>
-      <li><span class="en">I'm staying at Fordham University, Rose Hill campus.</span><span class="jp">フォーダム大学ローズヒル校にいます</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-16" aria-label="Play">▶</button><span class="entxt">I got separated from my group.</span></span><span class="jp">グループとはぐれました</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-17" aria-label="Play">▶</button><span class="entxt">Can you help me?</span></span><span class="jp">助けてもらえますか？</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-18" aria-label="Play">▶</button><span class="entxt">Can I use your phone?</span></span><span class="jp">電話を貸してください</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-19" aria-label="Play">▶</button><span class="entxt">Where's the nearest subway?</span></span><span class="jp">一番近い地下鉄は？</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-20" aria-label="Play">▶</button><span class="entxt">I'm staying at Fordham University, Rose Hill campus.</span></span><span class="jp">フォーダム大学ローズヒル校にいます</span></li>
     </ul>
     <div class="fill">
       MY NAME: RINA · FROM: TOYOOKA, HYOGO, JAPAN<br>
@@ -441,13 +451,13 @@
     }
     return Promise.resolve(tryNext());
   }
-  document.querySelectorAll('.spk').forEach(function(btn){
+  document.querySelectorAll('.spk, .chipspk').forEach(function(btn){
     firstExisting(btn.getAttribute('data-audio')).then(function(u){
       if(!u) btn.classList.add('missing');
     });
   });
   document.addEventListener('click',function(e){
-    var btn=e.target.closest('.spk'); if(!btn) return;
+    var btn=e.target.closest('.spk, .chipspk'); if(!btn) return;
     var id=btn.getAttribute('data-audio');
     if(cur){ cur.pause(); if(curBtn) curBtn.classList.remove('playing'); }
     if(curBtn===btn && cur){ cur=null; curBtn=null; return; }
@@ -463,7 +473,7 @@
 </script>
 
 <script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
 </script>
 </body>
 </html>

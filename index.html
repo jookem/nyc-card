@@ -82,6 +82,20 @@
   }
   li .en{font-size:14.5px;font-weight:700;letter-spacing:-.012em;flex:1;min-width:0;line-height:1.28}
   li .jp{font-family:var(--talk);font-size:10.5px;color:var(--gray);flex:0 0 36%;text-align:right;line-height:1.3}
+  li .en{display:flex;align-items:center;gap:8px}
+  li .entxt{flex:1;min-width:0}
+  .spk{
+    flex:0 0 auto;width:27px;height:27px;border-radius:50%;border:none;
+    background:var(--ink);color:#fff;cursor:pointer;
+    display:inline-grid;place-items:center;font-size:11px;line-height:1;padding:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .spk:active{transform:scale(.9)}
+  .spk.playing{background:var(--go)}
+  .spk.missing{display:none}
+  .l1 li .spk{background:var(--line1)}
+  .la li .spk{background:var(--lineA)}
+  .ln li .spk{background:#B8960A}
   li.star{border-left-color:var(--go);background:#F3FBF5}
   li.bad{background:#FCE8E7}
   .la li.bad,.l1 li.bad,.ln li.bad{border-left-color:var(--line1)}
@@ -197,39 +211,39 @@
   <section class="sec l1" id="stuck">
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>When you don't understand</b><em>最重要</em></div>
     <ul>
-      <li class="star"><span class="en">Sorry, what?</span><span class="jp">え、なんて？</span></li>
-      <li class="star"><span class="en">Say that again?</span><span class="jp">もう一回言って？</span></li>
-      <li class="star"><span class="en">Sorry, I didn't catch that.</span><span class="jp">聞き取れなかった</span></li>
-      <li><span class="en">What's ___ mean?</span><span class="jp">___ってどういう意味？</span></li>
-      <li><span class="en">Could you speak slower, please?</span><span class="jp">もう少しゆっくり話してもらえますか？</span></li>
-      <li><span class="en">Hold on — one sec.</span><span class="jp">ちょっと待って</span></li>
-      <li><span class="en">How do you say ___ in English?</span><span class="jp">英語で何て言うの？</span></li>
-      <li><span class="en">I don't know how to say it...</span><span class="jp">なんて言えばいいか分からない</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="stuck-01" aria-label="Play">▶</button><span class="entxt">Sorry, what?</span></span><span class="jp">え、なんて？</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="stuck-02" aria-label="Play">▶</button><span class="entxt">Say that again?</span></span><span class="jp">もう一回言って？</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="stuck-03" aria-label="Play">▶</button><span class="entxt">Sorry, I didn't catch that.</span></span><span class="jp">聞き取れなかった</span></li>
+      <li><span class="en"><button class="spk" data-audio="stuck-04" aria-label="Play">▶</button><span class="entxt">What's ___ mean?</span></span><span class="jp">___ってどういう意味？</span></li>
+      <li><span class="en"><button class="spk" data-audio="stuck-05" aria-label="Play">▶</button><span class="entxt">Could you speak slower, please?</span></span><span class="jp">もう少しゆっくり話してもらえますか？</span></li>
+      <li><span class="en"><button class="spk" data-audio="stuck-07" aria-label="Play">▶</button><span class="entxt">Hold on — one sec.</span></span><span class="jp">ちょっと待って</span></li>
+      <li><span class="en"><button class="spk" data-audio="stuck-06" aria-label="Play">▶</button><span class="entxt">How do you say ___ in English?</span></span><span class="jp">英語で何て言うの？</span></li>
+      <li><span class="en"><button class="spk" data-audio="stuck-08" aria-label="Play">▶</button><span class="entxt">I don't know how to say it...</span></span><span class="jp">なんて言えばいいか分からない</span></li>
     </ul>
   </section>
 
   <section class="sec l1" id="room">
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>Your roommate</b><em>同じ部屋の子</em></div>
     <ul>
-      <li class="star"><span class="en">Hey! Are you my roommate? I'm Rina.</span><span class="jp">先に言う。先に話した人が気まずくならない</span></li>
-      <li><span class="en">Which bed do you want?</span><span class="jp">どっちのベッドがいい？</span></li>
-      <li class="star"><span class="en">Do you mind if I ___?</span><span class="jp">〜してもいい？（窓・電気・充電、全部これ）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="room-01" aria-label="Play">▶</button><span class="entxt">Hey! Are you my roommate? I'm Rina.</span></span><span class="jp">先に言う。先に話した人が気まずくならない</span></li>
+      <li><span class="en"><button class="spk" data-audio="room-02" aria-label="Play">▶</button><span class="entxt">Which bed do you want?</span></span><span class="jp">どっちのベッドがいい？</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="room-03" aria-label="Play">▶</button><span class="entxt">Do you mind if I ___?</span></span><span class="jp">〜してもいい？（窓・電気・充電、全部これ）</span></li>
       <li><span class="en">Is it okay if I turn off the light?</span><span class="jp">電気消してもいい？</span></li>
-      <li class="star"><span class="en">Are you going to breakfast?</span><span class="jp">朝ごはん行く？（一人で食べないために）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="room-05" aria-label="Play">▶</button><span class="entxt">Are you going to breakfast?</span></span><span class="jp">朝ごはん行く？（一人で食べないために）</span></li>
       <li><span class="en">Sorry, am I being loud?</span><span class="jp">ごめん、うるさい？</span></li>
-      <li class="star"><span class="en">Good night! See you tomorrow.</span><span class="jp">毎晩言う。2秒で一週間が変わる</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="room-07" aria-label="Play">▶</button><span class="entxt">Good night! See you tomorrow.</span></span><span class="jp">毎晩言う。2秒で一週間が変わる</span></li>
     </ul>
   </section>
 
   <section class="sec l1" id="campus">
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>Dorm &amp; dining hall</b><em>寮・食堂</em></div>
     <ul>
-      <li class="star"><span class="en">Can I sit here?</span><span class="jp">ここ座ってもいい？　←今週いちばん勇気のいる4語</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="campus-01" aria-label="Play">▶</button><span class="entxt">Can I sit here?</span></span><span class="jp">ここ座ってもいい？　←今週いちばん勇気のいる4語</span></li>
       <li><span class="en">Is anyone sitting here?</span><span class="jp">ここ空いてる？</span></li>
-      <li class="star"><span class="en">What is that? Is it good?</span><span class="jp">それ何？おいしい？（毎食使える会話のきっかけ）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="campus-03" aria-label="Play">▶</button><span class="entxt">What is that? Is it good?</span></span><span class="jp">それ何？おいしい？（毎食使える会話のきっかけ）</span></li>
       <li><span class="en">counselor</span><span class="jp">カウンセラー（引率スタッフ。teacherではない）</span></li>
       <li><span class="en">the dining hall / the lounge</span><span class="jp">食堂／ラウンジ</span></li>
-      <li><span class="en">What time do we meet?</span><span class="jp">何時集合？</span></li>
+      <li><span class="en"><button class="spk" data-audio="campus-07" aria-label="Play">▶</button><span class="entxt">What time do we meet?</span></span><span class="jp">何時集合？</span></li>
       <li><span class="en">Where are we going today?</span><span class="jp">今日どこ行くの？</span></li>
       <li><span class="en">How do you say hello in ___?</span><span class="jp">___語で「こんにちは」は？（世界中の子に効く）</span></li>
     </ul>
@@ -239,9 +253,9 @@
     <div class="sec-hd"><i style="background:var(--line1)">1</i><b>Shops &amp; hello</b><em>サバイバル</em></div>
     <ul>
       <li><span class="en">Can I get a ___?</span><span class="jp">___をください</span></li>
-      <li class="star"><span class="en">I'm good, thanks.</span><span class="jp">大丈夫です（＝いりません）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="shops-02" aria-label="Play">▶</button><span class="entxt">I'm good, thanks.</span></span><span class="jp">大丈夫です（＝いりません）</span></li>
       <li><span class="en">For here. / To go.</span><span class="jp">店内で／持ち帰りで</span></li>
-      <li><span class="en">"You all set?" → "Yeah, I'm good."</span><span class="jp">以上で大丈夫？→はい</span></li>
+      <li><span class="en"><button class="spk" data-audio="shops-04" aria-label="Play">▶</button><span class="entxt">"You all set?" → "Yeah, I'm good."</span></span><span class="jp">以上で大丈夫？→はい</span></li>
       <li><span class="en">"What's up?" → "Not much, you?"</span><span class="jp">挨拶。質問じゃない</span></li>
       <li class="star"><span class="en">What about you?</span><span class="jp">そっちは？（必ず返す）</span></li>
     </ul>
@@ -250,13 +264,13 @@
   <section class="sec la" id="friends">
     <div class="sec-hd"><i style="background:var(--lineA)">A</i><b>With friends</b><em>あいづち・反応</em></div>
     <ul>
-      <li class="star"><span class="en">Same.</span><span class="jp">わかる／私も</span></li>
-      <li class="star"><span class="en">For real? / No way!</span><span class="jp">まじで？／うそー</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="friends-01" aria-label="Play">▶</button><span class="entxt">Same.</span></span><span class="jp">わかる／私も</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="friends-02" aria-label="Play">▶</button><span class="entxt">For real? / No way!</span></span><span class="jp">まじで？／うそー</span></li>
       <li><span class="en">Oh really? / Right?!</span><span class="jp">そうなんだ／だよね</span></li>
       <li><span class="en">That's so cool. / Nice.</span><span class="jp">いいね</span></li>
       <li><span class="en">Aww, that sucks.</span><span class="jp">それはつらいね</span></li>
-      <li class="star"><span class="en">And then what?</span><span class="jp">それでどうなったの？</span></li>
-      <li class="star"><span class="en">What was it like?</span><span class="jp">どんな感じだった？（万能質問）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="friends-06" aria-label="Play">▶</button><span class="entxt">And then what?</span></span><span class="jp">それでどうなったの？</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="friends-07" aria-label="Play">▶</button><span class="entxt">What was it like?</span></span><span class="jp">どんな感じだった？（万能質問）</span></li>
       <li><span class="en">How come?</span><span class="jp">なんで？</span></li>
     </ul>
   </section>
@@ -265,12 +279,12 @@
     <div class="sec-hd"><i style="background:var(--lineA)">A</i><b>Plans &amp; opinions</b><em>予定・意見</em></div>
     <ul>
       <li><span class="en">Wanna go get food?</span><span class="jp">ごはん行かない？</span></li>
-      <li class="star"><span class="en">I'm down.</span><span class="jp">いいね、行く！</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="plans-02" aria-label="Play">▶</button><span class="entxt">I'm down.</span></span><span class="jp">いいね、行く！</span></li>
       <li><span class="en">I'll meet you in the lounge.</span><span class="jp">ラウンジで待ち合わせ（各フロアにあります）</span></li>
       <li><span class="en">It's kinda boring, honestly.</span><span class="jp">正直ちょっと退屈</span></li>
       <li class="star"><span class="en">It's not really my thing.</span><span class="jp">やんわり断る「NO」</span></li>
       <li><span class="en">Yeah, but...</span><span class="jp">うん、でも…（反対する時）</span></li>
-      <li class="star"><span class="en">Wait — English!</span><span class="jp">ちょっと、英語！</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="plans-07" aria-label="Play">▶</button><span class="entxt">Wait — English!</span></span><span class="jp">ちょっと、英語！</span></li>
     </ul>
   </section>
 
@@ -280,11 +294,11 @@
       <li class="bad"><span class="en">✗ "Let's be friends!"</span><span class="jp">英語では子どもっぽい／フラれる時の言葉</span></li>
       <li class="bad"><span class="en">✗ "I want to get to know you better." (1-on-1)</span><span class="jp">1対1だと告白に聞こえる</span></li>
       <li class="star"><span class="en">I wanna get to know you guys better.</span><span class="jp">みんなと仲良くなりたい（複数形が安全）</span></li>
-      <li class="star"><span class="en">Okay, I have so many questions.</span><span class="jp">質問めっちゃある！（相手に話させる）</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="closer-04" aria-label="Play">▶</button><span class="entxt">Okay, I have so many questions.</span></span><span class="jp">質問めっちゃある！（相手に話させる）</span></li>
       <li><span class="en">Tell me more about that!</span><span class="jp">もっと聞かせて！</span></li>
       <li><span class="en">You're so easy to talk to.</span><span class="jp">話しやすいね</span></li>
       <li><span class="en">We should hang out more!</span><span class="jp">もっと一緒にいたいな</span></li>
-      <li class="star"><span class="en">Are you free tomorrow?</span><span class="jp">明日ひま？　←これが本当の「親しみたい」</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="closer-08" aria-label="Play">▶</button><span class="entxt">Are you free tomorrow?</span></span><span class="jp">明日ひま？　←これが本当の「親しみたい」</span></li>
     </ul>
   </section>
 
@@ -350,8 +364,8 @@
   <section class="sec ln" id="toyooka">
     <div class="sec-hd"><i style="background:var(--lineN);color:#0B0B0C">N</i><b>"Where are you from?"</b><em>豊岡の答え</em></div>
     <ul>
-      <li class="star"><span class="en">Japan — a city called Toyooka.</span><span class="jp">豊岡ってところ</span></li>
-      <li class="star"><span class="en">It's in the countryside, near Kyoto.</span><span class="jp">「どこそれ？」の答え</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="toy-02" aria-label="Play">▶</button><span class="entxt">Japan — a city called Toyooka.</span></span><span class="jp">豊岡ってところ</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="toy-03" aria-label="Play">▶</button><span class="entxt">It's in the countryside, near Kyoto.</span></span><span class="jp">「どこそれ？」の答え</span></li>
       <li><span class="en">It's pretty far from everything.</span><span class="jp">けっこう田舎だよ（笑って言う）</span></li>
       <li><span class="en">There's a hot spring town next to us. People walk outside in robes.</span><span class="jp">城崎温泉</span></li>
       <li class="star"><span class="en">It's like a pajama party, but it's a whole town.</span><span class="jp">城崎のジョーク。必ずウケる</span></li>
@@ -369,9 +383,9 @@
       <li><span class="en">It's hard to explain, but...</span><span class="jp">説明しにくいけど…</span></li>
       <li><span class="en">Have you been?</span><span class="jp">行ったことある？</span></li>
       <li><span class="en">It was worth it.</span><span class="jp">行ってよかった</span></li>
-      <li class="star"><span class="en">Do you have Instagram?</span><span class="jp">インスタやってる？</span></li>
+      <li class="star"><span class="en"><button class="spk" data-audio="bye-06" aria-label="Play">▶</button><span class="entxt">Do you have Instagram?</span></span><span class="jp">インスタやってる？</span></li>
       <li><span class="en">What's your @?</span><span class="jp">アカウント名は？</span></li>
-      <li><span class="en">It was so nice meeting you!</span><span class="jp">会えてよかった！</span></li>
+      <li><span class="en"><button class="spk" data-audio="bye-08" aria-label="Play">▶</button><span class="entxt">It was so nice meeting you!</span></span><span class="jp">会えてよかった！</span></li>
       <li><span class="en">Have a good one!</span><span class="jp">じゃあね！</span></li>
     </ul>
   </section>
@@ -410,11 +424,46 @@
 </div>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function () {});
-    });
+(function(){
+  var EXT=['mp3','webm','m4a','ogg'];
+  var cur=null, curBtn=null, found={};
+  function firstExisting(id){
+    // returns a promise resolving to a working url or null
+    if(found[id]!==undefined) return Promise.resolve(found[id]);
+    var i=0;
+    function tryNext(){
+      if(i>=EXT.length){ found[id]=null; return null; }
+      var url='audio/'+id+'.'+EXT[i++];
+      return fetch(url,{method:'HEAD'}).then(function(r){
+        if(r.ok){ found[id]=url; return url; }
+        return tryNext();
+      }).catch(tryNext);
+    }
+    return Promise.resolve(tryNext());
   }
+  document.querySelectorAll('.spk').forEach(function(btn){
+    firstExisting(btn.getAttribute('data-audio')).then(function(u){
+      if(!u) btn.classList.add('missing');
+    });
+  });
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.spk'); if(!btn) return;
+    var id=btn.getAttribute('data-audio');
+    if(cur){ cur.pause(); if(curBtn) curBtn.classList.remove('playing'); }
+    if(curBtn===btn && cur){ cur=null; curBtn=null; return; }
+    firstExisting(id).then(function(u){
+      if(!u){ btn.classList.add('missing'); return; }
+      var a=new Audio(u); cur=a; curBtn=btn; btn.classList.add('playing');
+      a.onended=function(){ btn.classList.remove('playing'); if(cur===a){cur=null;curBtn=null;} };
+      a.onerror=function(){ btn.classList.add('missing'); btn.classList.remove('playing'); };
+      a.play().catch(function(){});
+    });
+  });
+})();
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 </script>
 </body>
 </html>
